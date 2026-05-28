@@ -1,26 +1,26 @@
 /**
  * Delete course button with confirmation.
- * Navigates to /admin/courses after deletion.
  */
 'use client'
 
 import { useState }    from 'react'
 import { useRouter }   from 'next/navigation'
 
-interface DeleteCourseButtonProps {
-  courseId: string
-  locale:   string
+interface Props {
+  id:    string
+  title: string
 }
 
-export function DeleteCourseButton({ courseId, locale }: DeleteCourseButtonProps) {
-  const router  = useRouter()
+export function DeleteCourseButton({ id, title }: Props) {
+  const router      = useRouter()
   const [busy, setBusy] = useState(false)
 
   async function handleDelete() {
-    if (!confirm('Delete this course permanently? This cannot be undone.')) return
+    if (!confirm(`Delete "${title}" permanently? This cannot be undone.`)) return
     setBusy(true)
-    await fetch(`/api/admin/courses/${courseId}`, { method: 'DELETE' })
-    router.push(`/${locale}/admin/courses`)
+    await fetch(`/api/admin/courses/${id}`, { method: 'DELETE' })
+    router.refresh()
+    router.push('/admin/courses')
   }
 
   return (
@@ -28,9 +28,9 @@ export function DeleteCourseButton({ courseId, locale }: DeleteCourseButtonProps
       type="button"
       onClick={() => void handleDelete()}
       disabled={busy}
-      className="text-sm text-destructive border border-destructive/40 rounded-md px-3 py-1.5 hover:bg-destructive/5 disabled:opacity-60 transition-colors"
+      className="rounded-md bg-red-50 px-3 py-1.5 text-xs font-medium text-red-600 hover:bg-red-100 disabled:opacity-60 transition-colors cursor-pointer"
     >
-      {busy ? 'Deleting…' : 'Delete Course'}
+      {busy ? 'Deleting…' : 'Delete'}
     </button>
   )
 }

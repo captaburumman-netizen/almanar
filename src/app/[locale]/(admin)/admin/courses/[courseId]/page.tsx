@@ -124,7 +124,7 @@ export default async function EditCoursePage({ params }: Props) {
         <p className="text-xs text-muted-foreground">
           Deleting a course will cascade-delete all lessons and remove all enrollments.
         </p>
-        <DeleteCourseButton courseId={courseId} locale={locale} />
+        <DeleteCourseButton id={courseId} title={course.titleEn} />
       </section>
     </div>
   )
