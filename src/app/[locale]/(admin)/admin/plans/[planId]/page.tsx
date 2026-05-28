@@ -48,7 +48,7 @@ export default async function AdminPlanDetailPage({ params }: Props) {
     <div className="space-y-8 max-w-3xl">
       {/* Breadcrumb */}
       <nav className="flex items-center gap-2 text-sm text-muted-foreground">
-        <Link href={`/${locale}/admin/plans` as `/${string}/admin/plans`} className="hover:text-foreground">
+        <Link href={`/admin/plans`} className="hover:text-foreground">
           {isAr ? 'خطط العضوية' : 'Plans'}
         </Link>
         <span>/</span>

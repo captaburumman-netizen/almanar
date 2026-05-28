@@ -46,7 +46,7 @@ export default async function AdminBundlesPage({
           </p>
         </div>
         <Link
-          href={`/${locale}/admin/bundles/new` as `/${string}/admin/bundles/new`}
+          href={`/admin/bundles/new`}
           className="btn-primary px-4 py-2 rounded-lg text-sm font-semibold"
         >
           {isAr ? '+ باقة جديدة' : '+ New Bundle'}
@@ -94,7 +94,7 @@ export default async function AdminBundlesPage({
                   </td>
                   <td className="px-4 py-3">
                     <Link
-                      href={`/${locale}/admin/bundles/${b.id}` as `/${string}/admin/bundles/${string}`}
+                      href={`/admin/bundles/${b.id}`}
                       className="text-xs text-primary hover:underline"
                     >
                       {isAr ? 'تحرير' : 'Edit'}

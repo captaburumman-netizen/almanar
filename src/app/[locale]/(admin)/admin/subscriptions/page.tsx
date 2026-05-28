@@ -76,7 +76,7 @@ export default async function AdminSubscriptionsPage({ params, searchParams }: P
           </p>
         </div>
         <Link
-          href={`/${locale}/admin/plans` as `/${string}/admin/plans`}
+          href={`/admin/plans`}
           className="text-sm text-primary hover:underline"
         >
           {isAr ? 'إدارة الخطط ←' : 'Manage Plans →'}
@@ -86,7 +86,7 @@ export default async function AdminSubscriptionsPage({ params, searchParams }: P
       {/* Status filter pills */}
       <div className="flex flex-wrap gap-2" role="group" aria-label={isAr ? 'تصفية الحالة' : 'Filter by status'}>
         <Link
-          href={`/${locale}/admin/subscriptions` as `/${string}/admin/subscriptions`}
+          href={`/admin/subscriptions`}
           className={[
             'rounded-full px-3 py-1 text-xs font-medium transition-colors',
             !status ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground hover:bg-accent',
@@ -97,7 +97,7 @@ export default async function AdminSubscriptionsPage({ params, searchParams }: P
         {validStatuses.map((s) => (
           <Link
             key={s}
-            href={`/${locale}/admin/subscriptions?status=${s.toLowerCase()}` as `/${string}/admin/subscriptions`}
+            href={`/admin/subscriptions?status=${s.toLowerCase()}`}
             className={[
               'rounded-full px-3 py-1 text-xs font-medium transition-colors',
               status?.toUpperCase() === s
@@ -180,7 +180,7 @@ export default async function AdminSubscriptionsPage({ params, searchParams }: P
               <div className="flex gap-2">
                 {page > 1 && (
                   <Link
-                    href={`/${locale}/admin/subscriptions?page=${page - 1}${status ? `&status=${status}` : ''}` as `/${string}/admin/subscriptions`}
+                    href={`/admin/subscriptions?page=${page - 1}${status ? `&status=${status}` : ''}`}
                     className="rounded-md border border-border px-3 py-1.5 text-xs hover:bg-muted transition-colors"
                   >
                     {isAr ? 'السابق' : 'Previous'}
@@ -188,7 +188,7 @@ export default async function AdminSubscriptionsPage({ params, searchParams }: P
                 )}
                 {page < totalPages && (
                   <Link
-                    href={`/${locale}/admin/subscriptions?page=${page + 1}${status ? `&status=${status}` : ''}` as `/${string}/admin/subscriptions`}
+                    href={`/admin/subscriptions?page=${page + 1}${status ? `&status=${status}` : ''}`}
                     className="rounded-md border border-border px-3 py-1.5 text-xs hover:bg-muted transition-colors"
                   >
                     {isAr ? 'التالي' : 'Next'}

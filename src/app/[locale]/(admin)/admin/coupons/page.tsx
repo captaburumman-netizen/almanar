@@ -49,7 +49,7 @@ export default async function AdminCouponsPage({ params }: Props) {
           <p className="mt-1 text-sm text-gray-500">{coupons.length} coupon{coupons.length !== 1 ? 's' : ''}</p>
         </div>
         <Link
-          href={`/${locale}/admin/coupons/new` as any}
+          href={`/admin/coupons/new`}
           className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white hover:bg-indigo-700 transition-colors"
         >
           + New Coupon
@@ -120,7 +120,7 @@ export default async function AdminCouponsPage({ params }: Props) {
                     </td>
                     <td className="px-4 py-3 text-right">
                       <Link
-                        href={`/${locale}/admin/coupons/${c.id}` as any}
+                        href={`/admin/coupons/${c.id}`}
                         className="text-indigo-600 hover:text-indigo-800 font-medium text-xs"
                       >
                         Edit

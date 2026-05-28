@@ -56,7 +56,7 @@ export default async function AdminBundleDetailPage({ params }: Props) {
     <div className="space-y-8 max-w-3xl">
       {/* Breadcrumb */}
       <nav className="flex items-center gap-2 text-sm text-muted-foreground">
-        <Link href={`/${locale}/admin/bundles` as `/${string}/admin/bundles`} className="hover:text-foreground">
+        <Link href={`/admin/bundles`} className="hover:text-foreground">
           {isAr ? 'الباقات' : 'Bundles'}
         </Link>
         <span>/</span>
@@ -115,7 +115,7 @@ export default async function AdminBundleDetailPage({ params }: Props) {
         </p>
         <DeleteBundleButton
           bundleId={bundle.id}
-          redirectPath={`/${locale}/admin/bundles`}
+          redirectPath={`/admin/bundles`}
         />
       </section>
     </div>

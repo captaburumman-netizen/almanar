@@ -21,7 +21,7 @@ export default async function NewBundlePage({
     <div className="space-y-6 max-w-3xl">
       {/* Breadcrumb */}
       <nav className="flex items-center gap-2 text-sm text-muted-foreground">
-        <Link href={`/${locale}/admin/bundles` as `/${string}/admin/bundles`} className="hover:text-foreground">
+        <Link href={`/admin/bundles`} className="hover:text-foreground">
           {isAr ? 'الباقات' : 'Bundles'}
         </Link>
         <span>/</span>

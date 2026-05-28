@@ -67,7 +67,7 @@ export default async function AdminReviewsPage({ params, searchParams }: Props) 
     if (params.status) sp.set('status', params.status)
     if (params.page && params.page !== '1') sp.set('page', params.page)
     const q = sp.toString()
-    return `/${locale}/admin/reviews${q ? `?${q}` : ''}`
+    return `/admin/reviews${q ? `?${q}` : ''}`
   }
 
   return (
@@ -94,7 +94,7 @@ export default async function AdminReviewsPage({ params, searchParams }: Props) 
           return (
             <Link
               key={value}
-              href={buildUrl({ status: value === 'ALL' ? undefined : value }) as any}
+              href={buildUrl({ status: value === 'ALL' ? undefined : value })}
               className={[
                 'rounded-full px-4 py-1.5 text-sm font-semibold transition-all',
                 active ? color + ' ring-2 ring-offset-1 ring-current' : 'bg-gray-100 text-gray-500 hover:bg-gray-200',
@@ -117,7 +117,7 @@ export default async function AdminReviewsPage({ params, searchParams }: Props) 
             {reviews.map((review) => (
               <ReviewModerationRow
                 key={review.id}
-                review={review as any}
+                review={review}
                 locale={locale}
               />
             ))}
@@ -134,7 +134,7 @@ export default async function AdminReviewsPage({ params, searchParams }: Props) 
           <div className="flex gap-2">
             {page > 1 && (
               <Link
-                href={buildUrl({ status: statusFilter, page: String(page - 1) }) as any}
+                href={buildUrl({ status: statusFilter, page: String(page - 1) })}
                 className="rounded-lg border border-gray-300 px-3 py-1.5 text-gray-700 hover:bg-gray-50"
               >
                 Previous
@@ -142,7 +142,7 @@ export default async function AdminReviewsPage({ params, searchParams }: Props) 
             )}
             {page < totalPages && (
               <Link
-                href={buildUrl({ status: statusFilter, page: String(page + 1) }) as any}
+                href={buildUrl({ status: statusFilter, page: String(page + 1) })}
                 className="rounded-lg border border-gray-300 px-3 py-1.5 text-gray-700 hover:bg-gray-50"
               >
                 Next

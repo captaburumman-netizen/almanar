@@ -45,7 +45,7 @@ export default async function AdminPlansPage({
           </p>
         </div>
         <Link
-          href={`/${locale}/admin/plans/new` as `/${string}/admin/plans/new`}
+          href={`/admin/plans/new`}
           className="btn-primary px-4 py-2 rounded-lg text-sm font-semibold"
         >
           {isAr ? '+ خطة جديدة' : '+ New Plan'}
@@ -97,7 +97,7 @@ export default async function AdminPlansPage({
                   </td>
                   <td className="px-4 py-3">
                     <Link
-                      href={`/${locale}/admin/plans/${p.id}` as `/${string}/admin/plans/${string}`}
+                      href={`/admin/plans/${p.id}`}
                       className="text-xs text-primary hover:underline"
                     >
                       {isAr ? 'تحرير' : 'Edit'}
