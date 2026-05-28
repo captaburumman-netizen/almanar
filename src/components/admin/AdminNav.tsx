@@ -91,44 +91,45 @@ function IconArrowLeft() {
 
 const NAV_SECTIONS = [
   {
-    title: 'Content',
+    title: 'Content', titleAr: 'المحتوى',
     items: [
-      { label: 'Courses',  href: '/admin/courses'  as const, Icon: IconBook        },
-      { label: 'Products', href: '/admin/products' as const, Icon: IconShoppingBag },
-      { label: 'Bundles',  href: '/admin/bundles'  as const, Icon: IconCube        },
+      { label: 'Courses',  labelAr: 'الدورات',   href: '/admin/courses'  as const, Icon: IconBook        },
+      { label: 'Products', labelAr: 'المنتجات',  href: '/admin/products' as const, Icon: IconShoppingBag },
+      { label: 'Bundles',  labelAr: 'الحزم',     href: '/admin/bundles'  as const, Icon: IconCube        },
     ],
   },
   {
-    title: 'Marketing',
+    title: 'Marketing', titleAr: 'التسويق',
     items: [
-      { label: 'Broadcast', href: '/admin/broadcast' as const, Icon: IconMegaphone },
-      { label: 'Coupons',   href: '/admin/coupons'   as const, Icon: IconTag       },
-      { label: 'Reviews',   href: '/admin/reviews'   as const, Icon: IconStar      },
+      { label: 'Broadcast', labelAr: 'الإرسال',    href: '/admin/broadcast' as const, Icon: IconMegaphone },
+      { label: 'Coupons',   labelAr: 'الكوبونات',  href: '/admin/coupons'   as const, Icon: IconTag       },
+      { label: 'Reviews',   labelAr: 'التقييمات',  href: '/admin/reviews'   as const, Icon: IconStar      },
     ],
   },
   {
-    title: 'People',
+    title: 'People', titleAr: 'المستخدمون',
     items: [
-      { label: 'Users',   href: '/admin/users'         as const, Icon: IconUsers    },
-      { label: 'Members', href: '/admin/subscriptions' as const, Icon: IconSparkles },
+      { label: 'Users',   labelAr: 'المستخدمون', href: '/admin/users'         as const, Icon: IconUsers    },
+      { label: 'Members', labelAr: 'الأعضاء',    href: '/admin/subscriptions' as const, Icon: IconSparkles },
     ],
   },
   {
-    title: 'Sales',
+    title: 'Sales', titleAr: 'المبيعات',
     items: [
-      { label: 'Plans', href: '/admin/plans' as const, Icon: IconSparkles },
+      { label: 'Plans', labelAr: 'الخطط', href: '/admin/plans' as const, Icon: IconSparkles },
     ],
   },
   {
-    title: 'Insights',
+    title: 'Insights', titleAr: 'الإحصائيات',
     items: [
-      { label: 'Analytics', href: '/admin/analytics' as const, Icon: IconChartBar },
+      { label: 'Analytics', labelAr: 'التحليلات', href: '/admin/analytics' as const, Icon: IconChartBar },
     ],
   },
-] as const
+]
 
 export function AdminNav({ locale }: AdminNavProps) {
   const pathname = usePathname()
+  const isAr     = locale === 'ar'
 
   function isActive(href: string) {
     if (href === '/admin') return pathname === `/${locale}/admin`
@@ -161,19 +162,19 @@ export function AdminNav({ locale }: AdminNavProps) {
           ].join(' ')}
         >
           <IconGrid />
-          Overview
+          {isAr ? 'نظرة عامة' : 'Overview'}
         </Link>
       </div>
 
       {/* ── Sectioned nav ─────────────────────────────────────────────── */}
       <div className="flex-1 overflow-y-auto px-3 pb-3 pt-2 space-y-5">
-        {NAV_SECTIONS.map(({ title, items }) => (
+        {NAV_SECTIONS.map(({ title, titleAr, items }) => (
           <div key={title}>
             <p className="px-3 mb-1.5 text-[10px] font-semibold uppercase tracking-widest text-stone-600">
-              {title}
+              {isAr ? titleAr : title}
             </p>
             <ul className="space-y-0.5" role="list">
-              {items.map(({ label, href, Icon }) => {
+              {items.map(({ label, labelAr, href, Icon }) => {
                 const active = isActive(href)
                 return (
                   <li key={href}>
@@ -187,7 +188,7 @@ export function AdminNav({ locale }: AdminNavProps) {
                       ].join(' ')}
                     >
                       <Icon />
-                      {label}
+                      {isAr ? labelAr : label}
                     </Link>
                   </li>
                 )
@@ -204,7 +205,7 @@ export function AdminNav({ locale }: AdminNavProps) {
           className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm text-stone-500 hover:text-stone-300 hover:bg-white/5 transition-colors duration-150"
         >
           <IconArrowLeft />
-          Back to Site
+          {isAr ? 'العودة للموقع' : 'Back to Site'}
         </Link>
       </div>
     </nav>

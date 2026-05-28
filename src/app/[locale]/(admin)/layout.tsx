@@ -15,10 +15,13 @@ interface AdminLayoutProps {
 export default async function AdminLayout({ children, params }: AdminLayoutProps) {
   const { locale } = await params
   await requireAdmin(locale)
+  const isAr = locale === 'ar'
 
   return (
-    <div className="flex h-screen overflow-hidden bg-stone-100">
-
+    <div
+      className="flex h-screen overflow-hidden bg-stone-100"
+      dir={isAr ? 'rtl' : 'ltr'}
+    >
       {/* ── Dark Sidebar ─────────────────────────────────────────────── */}
       <aside className="w-56 shrink-0 bg-stone-950 flex flex-col overflow-y-auto z-30">
         <AdminNav locale={locale} />
@@ -28,7 +31,7 @@ export default async function AdminLayout({ children, params }: AdminLayoutProps
       <div className="flex-1 min-w-0 flex flex-col overflow-hidden">
 
         {/* Top bar */}
-        <AdminTopBar />
+        <AdminTopBar locale={locale} />
 
         {/* Scrollable content */}
         <main className="flex-1 overflow-y-auto">
