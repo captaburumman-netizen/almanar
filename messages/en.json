@@ -1,0 +1,356 @@
+{
+  "metadata": {
+    "brand": "ALMANAR",
+    "title": "ALMANAR — Parenting Education Platform",
+    "description": "Expert-led parenting courses, Montessori resources, and a curated digital library for intentional parents."
+  },
+
+  "common": {
+    "brand": "ALMANAR",
+    "tagline": "The Lighthouse for Parenting",
+    "nav": {
+      "home":       "Home",
+      "courses":    "Courses",
+      "store":      "Store",
+      "pricing":    "Membership",
+      "dashboard":  "Dashboard",
+      "admin":      "Admin",
+      "signin":     "Sign In",
+      "signup":     "Get Started",
+      "signout":    "Sign Out",
+      "account":    "My Account"
+    },
+    "actions": {
+      "learnMore":    "Learn More",
+      "viewAll":      "View All",
+      "buy":          "Buy Now",
+      "enroll":       "Enroll Now",
+      "subscribe":    "Subscribe",
+      "cancel":       "Cancel",
+      "save":         "Save",
+      "saving":       "Saving...",
+      "edit":         "Edit",
+      "delete":       "Delete",
+      "back":         "Back",
+      "continue":     "Continue",
+      "download":     "Download",
+      "claim":        "Claim Free",
+      "close":        "Close",
+      "confirm":      "Confirm",
+      "tryAgain":     "Try Again"
+    },
+    "status": {
+      "loading":     "Loading...",
+      "error":       "Something went wrong. Please try again.",
+      "success":     "Success!",
+      "comingSoon":  "Coming Soon",
+      "required":    "Required",
+      "optional":    "Optional"
+    },
+    "pagination": {
+      "previous":  "Previous",
+      "next":      "Next",
+      "page":      "Page {current} of {total}"
+    },
+    "footer": {
+      "rights":   "All rights reserved.",
+      "privacy":  "Privacy Policy",
+      "terms":    "Terms of Service",
+      "contact":  "Contact"
+    }
+  },
+
+  "auth": {
+    "signInTitle":           "Welcome back",
+    "signInDescription":     "Sign in to your ALMANAR account",
+    "signUpTitle":           "Create your account",
+    "signUpDescription":     "Join the ALMANAR parenting community",
+    "forgotPasswordTitle":   "Reset your password",
+    "forgotPasswordDescription": "Enter your email and we'll send you a reset link",
+    "resetPasswordTitle":    "Set new password",
+    "resetPasswordDescription": "Choose a strong password for your account",
+
+    "name":            "Full name",
+    "email":           "Email address",
+    "password":        "Password",
+    "newPassword":     "New password",
+    "confirmPassword": "Confirm password",
+    "passwordHint":    "Minimum 8 characters",
+
+    "signIn":          "Sign In",
+    "createAccount":   "Create Account",
+    "sendResetLink":   "Send Reset Link",
+    "resetPassword":   "Update Password",
+    "forgotPassword":  "Forgot password?",
+    "backToSignIn":    "Back to sign in",
+
+    "noAccount":    "Don't have an account?",
+    "haveAccount":  "Already have an account?",
+
+    "invalidCredentials": "Invalid email or password",
+    "sessionExpired":     "Your session expired. Please sign in again.",
+    "genericError":       "Something went wrong. Please try again.",
+    "emailTaken":         "An account with this email already exists",
+    "passwordMismatch":   "Passwords do not match",
+    "passwordTooShort":   "Password must be at least 8 characters",
+    "invalidResetLink":   "This reset link is invalid or has already been used.",
+
+    "resetEmailSent":       "Reset link sent! Check your inbox.",
+    "passwordResetSuccess": "Password updated — redirecting to sign in…"
+  },
+
+  "home": {
+    "hero": {
+      "badge":       "Premium Parenting Education",
+      "title":       "Raise Confident, Thriving Children",
+      "subtitle":    "Expert-led courses, Montessori-inspired resources, and a curated digital library — all in one trusted space.",
+      "cta":         "Explore Courses",
+      "ctaSecondary": "Learn About Membership"
+    },
+    "features": {
+      "title":     "Everything You Need as a Parent",
+      "subtitle":  "Purposefully curated to support your parenting journey",
+      "courses": {
+        "title": "Expert-Led Courses",
+        "desc":  "Structured, evidence-based learning from certified child development specialists"
+      },
+      "store": {
+        "title": "Digital Resource Library",
+        "desc":  "Ebooks, printables, and Montessori activity materials available instantly"
+      },
+      "membership": {
+        "title": "Membership Access",
+        "desc":  "Unlimited access to our growing library of member-only content"
+      }
+    },
+    "coursesTeaser": {
+      "title":    "Featured Courses",
+      "viewAll":  "View All Courses"
+    },
+    "storeTeaser": {
+      "title":   "From the Digital Store",
+      "viewAll": "Browse the Store"
+    }
+  },
+
+  "courses": {
+    "catalog": {
+      "title":            "All Courses",
+      "subtitle":         "Evidence-based parenting education, at your pace",
+      "searchPlaceholder": "Search courses...",
+      "noResults":        "No courses found matching your filters",
+      "filterAll":        "All Levels",
+      "filterBeginner":   "Beginner",
+      "filterIntermediate": "Intermediate",
+      "filterAdvanced":   "Advanced",
+      "memberOnlyBadge":  "Member Only",
+      "freeBadge":        "Free",
+      "lessons":          "{count} lessons",
+      "duration":         "{duration} total"
+    },
+    "detail": {
+      "enroll":           "Enroll Now",
+      "buyFor":           "Buy for {price}",
+      "memberAccess":     "Included with Membership",
+      "preview":          "Preview",
+      "free":             "Free",
+      "lessonsCount":     "{count} lessons",
+      "durationLabel":    "Total duration",
+      "levelLabel":       "Level",
+      "previewLesson":    "Preview this lesson",
+      "lockedLesson":     "Enroll to access",
+      "signInToEnroll":   "Sign in to enroll",
+      "alreadyEnrolled":  "Continue Learning",
+      "includes":         "This course includes"
+    },
+    "player": {
+      "complete":     "Mark Complete",
+      "completed":    "Completed",
+      "nextLesson":   "Next Lesson",
+      "prevLesson":   "Previous Lesson",
+      "progress":     "{percent}% complete",
+      "lessonNumber": "Lesson {number}",
+      "backToCourse": "Back to course",
+      "noAccess":     "You don't have access to this lesson.",
+      "enroll":       "Enroll to access all lessons"
+    }
+  },
+
+  "store": {
+    "title":    "Digital Store",
+    "subtitle": "Resources to support every stage of your parenting journey",
+    "categories": {
+      "all":       "All",
+      "ebook":     "Ebooks",
+      "printable": "Printables",
+      "montessori": "Montessori Materials",
+      "toy":       "Toy Recommendations"
+    },
+    "languages": {
+      "en":        "English",
+      "ar":        "Arabic",
+      "bilingual": "Bilingual"
+    },
+    "freeBadge":       "Free",
+    "claimFree":       "Claim for Free",
+    "buyNow":          "Buy Now",
+    "buyFor":          "Buy for {price}",
+    "download":        "Download",
+    "affiliateLink":   "View Recommendation",
+    "downloadExpiry":  "Download link valid for 48 hours",
+    "redownload":      "Get new download link",
+    "downloadsLeft":   "{count} downloads remaining",
+    "claimSuccess":    "Added to your downloads!",
+    "claimSignIn":     "Sign in to claim this free resource",
+    "bundleBadge":     "Bundle"
+  },
+
+  "pricing": {
+    "title":          "Simple, Transparent Pricing",
+    "subtitle":       "Join thousands of intentional parents",
+    "monthly":        "Monthly",
+    "annual":         "Annual",
+    "savePercent":    "Save {percent}%",
+    "perMonth":       "/ month",
+    "perYear":        "/ year",
+    "billedAnnually": "Billed annually",
+    "subscribe":      "Start Membership",
+    "currentPlan":    "Current Plan",
+    "cancelAnytime":  "Cancel anytime",
+    "includes":       "Membership includes",
+    "orBuyALaCarte":  "Or buy individual courses",
+    "faq":            "Frequently Asked Questions"
+  },
+
+  "dashboard": {
+    "title":    "My Learning",
+    "greeting": "Welcome back, {name}",
+    "tabs": {
+      "courses":    "My Courses",
+      "downloads":  "My Downloads",
+      "membership": "Membership"
+    },
+    "courses": {
+      "empty":    "You haven't enrolled in any courses yet",
+      "browse":   "Browse Courses",
+      "progress": "{percent}% complete",
+      "continue": "Continue Learning",
+      "start":    "Start Learning"
+    },
+    "downloads": {
+      "empty":        "No downloads yet",
+      "browseStore":  "Browse Store",
+      "expires":      "Expires {date}",
+      "expired":      "Link expired",
+      "redownload":   "Get new link",
+      "limitReached": "Download limit reached",
+      "downloadNow":  "Download Now"
+    },
+    "membership": {
+      "active":      "Active Member",
+      "inactive":    "No active membership",
+      "renewsOn":    "Renews {date}",
+      "cancelsOn":   "Access until {date}",
+      "manage":      "Manage Subscription",
+      "subscribe":   "Get Membership",
+      "cancelNote":  "You can cancel anytime from your subscription settings."
+    }
+  },
+
+  "admin": {
+    "nav": {
+      "overview":  "Overview",
+      "courses":   "Courses",
+      "products":  "Products",
+      "bundles":   "Bundles",
+      "users":     "Users",
+      "analytics": "Analytics"
+    },
+    "overview": {
+      "title":          "Admin Overview",
+      "enrollments":    "Total Enrollments",
+      "revenue":        "Total Revenue",
+      "activeMembers":  "Active Members",
+      "downloads":      "Total Downloads"
+    },
+    "courses": {
+      "title":       "Courses",
+      "new":         "New Course",
+      "published":   "Published",
+      "draft":       "Draft",
+      "memberOnly":  "Member Only",
+      "edit":        "Edit Course",
+      "lessons":     "Manage Lessons",
+      "deleteConfirm": "Are you sure you want to delete this course?"
+    },
+    "products": {
+      "title":         "Digital Products",
+      "new":           "New Product",
+      "edit":          "Edit Product",
+      "deleteConfirm": "Are you sure you want to delete this product?"
+    },
+    "bundles": {
+      "title":  "Bundles",
+      "new":    "New Bundle"
+    },
+    "users": {
+      "title":      "Users",
+      "search":     "Search users...",
+      "role":       "Role",
+      "enrolled":   "Enrolled courses",
+      "joined":     "Joined",
+      "grantAccess": "Grant Course Access"
+    },
+    "analytics": {
+      "title":          "Analytics",
+      "enrollments":    "Enrollments",
+      "revenue":        "Revenue",
+      "activeMembers":  "Active Members",
+      "downloads":      "Downloads",
+      "last30days":     "Last 30 days",
+      "allTime":        "All time",
+      "byCourse":       "Revenue by Course",
+      "byProduct":      "Revenue by Product",
+      "studentList":    "Student List"
+    },
+    "upload": {
+      "selectFile":    "Select file",
+      "uploading":     "Uploading...",
+      "uploadSuccess": "File uploaded",
+      "uploadError":   "Upload failed"
+    }
+  },
+
+  "emails": {
+    "welcome": {
+      "subject":  "Welcome to ALMANAR",
+      "greeting": "Welcome, {name}!",
+      "body":     "Your account has been created successfully. Start exploring our courses and resources.",
+      "cta":      "Explore Courses"
+    },
+    "enrollmentConfirmation": {
+      "subject": "You're enrolled in {courseTitle}",
+      "body":    "You now have full access to {courseTitle}. Start learning at your own pace.",
+      "cta":     "Start Learning"
+    },
+    "purchaseReceipt": {
+      "subject":  "Your ALMANAR purchase",
+      "body":     "Thank you for your purchase. Your download link is below.",
+      "download": "Download Your File",
+      "expiry":   "This link expires in 48 hours."
+    },
+    "passwordReset": {
+      "subject":  "Reset your ALMANAR password",
+      "body":     "You requested a password reset. Click the link below to set a new password.",
+      "cta":      "Reset Password",
+      "expiry":   "This link expires in 1 hour.",
+      "ignore":   "If you didn't request this, you can safely ignore this email."
+    },
+    "freeClaim": {
+      "subject":  "Your free resource from ALMANAR",
+      "body":     "Your free resource is ready to download.",
+      "download": "Download Now",
+      "expiry":   "This link expires in 48 hours."
+    }
+  }
+}

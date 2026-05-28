@@ -1,0 +1,187 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* shadcn/ui semantic tokens — ALMANAR Premium */
+    --background:           60 9% 98%;     /* #FAFAF9 stone-50       */
+    --foreground:           30 7% 11%;     /* #1C1917 stone-900      */
+
+    --card:                 0 0% 100%;     /* pure white             */
+    --card-foreground:      30 7% 11%;
+
+    --popover:              0 0% 100%;
+    --popover-foreground:   30 7% 11%;
+
+    --primary:              41 96% 40%;    /* #CA8A04 gold           */
+    --primary-foreground:   30 7% 11%;     /* dark text on gold (7.6:1 contrast) */
+
+    --secondary:            30 6% 25%;     /* #44403C dark stone     */
+    --secondary-foreground: 0 0% 98%;
+
+    --muted:                40 10% 96%;    /* #F5F5F4 stone-100      */
+    --muted-foreground:     30 5% 45%;     /* #78716C stone-500      */
+
+    --accent:               38 92% 96%;    /* #FFFBEB gold tint bg   */
+    --accent-foreground:    41 96% 30%;    /* dark gold text         */
+
+    --destructive:          0 72% 51%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border:               30 6% 90%;     /* #E7E5E4 stone-200      */
+    --input:                30 6% 90%;
+    --ring:                 41 96% 40%;    /* gold focus ring        */
+    --radius:               0.5rem;
+
+    /* ALMANAR extended tokens — keep for backward compat */
+    --sand:              #F5EFE0;
+    --sand-light:        #FAF7F2;
+    --sand-dark:         #E8DCC8;
+    --terracotta:        #C4622D;
+    --terracotta-dark:   #A84F23;
+    --terracotta-light:  #F0D4C4;
+    --sage:              #7A9E7E;
+    --sage-light:        #C5D9C6;
+    --warm-brown:        #3D2B1F;
+    --warm-charcoal:     #5C4033;
+    --brand-muted:       #9A8778;
+    --brand-border:      #DDD4C5;
+
+    /* New premium tokens */
+    --gold:              #CA8A04;
+    --gold-light:        #FEF9EC;
+    --gold-dark:         #92400E;
+    --stone-950:         #0C0A09;
+    --stone-900:         #1C1917;
+    --stone-800:         #292524;
+    --stone-700:         #44403C;
+    --stone-600:         #57534E;
+    --stone-500:         #78716C;
+    --stone-400:         #A8A29E;
+    --stone-200:         #E7E5E4;
+    --stone-100:         #F5F5F4;
+    --stone-50:          #FAFAF9;
+  }
+
+  /* Base resets */
+  * { @apply border-border; }
+
+  html { scroll-behavior: smooth; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-dm-sans), system-ui, sans-serif;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  [lang="ar"] body, [dir="rtl"] body {
+    font-family: var(--font-ibm-plex-arabic), system-ui, sans-serif;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    color: #1C1917;
+    font-feature-settings: "ss01" 1;
+  }
+
+  a { @apply cursor-pointer; }
+
+  ::selection {
+    background-color: #FEF9EC;
+    color: #92400E;
+  }
+}
+
+@layer utilities {
+  .sr-only {
+    position: absolute; width: 1px; height: 1px;
+    padding: 0; margin: -1px; overflow: hidden;
+    clip: rect(0,0,0,0); white-space: nowrap; border-width: 0;
+  }
+
+  .container-brand {
+    @apply mx-auto w-full max-w-content px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Legacy card — keep for admin pages */
+  .card-brand {
+    @apply rounded-xl border border-stone-200 bg-white shadow-card;
+  }
+
+  /* Premium card with gold hover */
+  .card-premium {
+    @apply rounded-2xl border border-stone-200 bg-white shadow-card
+           hover:border-gold/40 hover:shadow-gold-sm transition-all duration-200;
+  }
+
+  /* Glassmorphism */
+  .glass {
+    background: rgba(255,255,255,0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255,255,255,0.5);
+  }
+
+  .glass-dark {
+    background: rgba(28,25,23,0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+
+  /* Hero gradient — very subtle warm-to-white */
+  .gradient-warm {
+    background: linear-gradient(135deg, #FAFAF9 0%, #FFFBEB 50%, #FAFAF9 100%);
+  }
+
+  /* Premium hero with subtle gold tint */
+  .gradient-hero-premium {
+    background: radial-gradient(ellipse 80% 60% at 50% -10%, #FEF9EC 0%, #FAFAF9 60%);
+  }
+
+  /* Dark section gradient */
+  .gradient-dark-premium {
+    background: linear-gradient(135deg, #1C1917 0%, #292524 50%, #1C1917 100%);
+  }
+
+  .text-brand-muted { color: var(--brand-muted); }
+  .text-gold { color: var(--gold); }
+
+  .badge-gold {
+    @apply inline-flex items-center rounded-full bg-amber-50 border border-amber-200
+           px-3 py-1 text-xs font-medium text-amber-700;
+  }
+
+  .badge-terracotta {
+    @apply inline-flex items-center rounded-full bg-terracotta/10
+           px-2.5 py-0.5 text-xs font-medium text-terracotta;
+  }
+
+  .badge-sage {
+    @apply inline-flex items-center rounded-full bg-sage/10
+           px-2.5 py-0.5 text-xs font-medium text-sage;
+  }
+
+  /* Gold shimmer line */
+  .gold-line {
+    display: block;
+    height: 3px;
+    background: linear-gradient(90deg, #CA8A04, #FCD34D, #CA8A04);
+    border-radius: 999px;
+  }
+}

@@ -1,0 +1,31 @@
+# ─── ALMANAR — Netlify configuration ─────────────────────────────────────────
+
+[build]
+  # Prisma generate must run before next build so the client is up-to-date
+  command = "npx prisma generate && npm run build"
+  publish  = ".next"
+
+[build.environment]
+  NODE_VERSION = "20"
+  NPM_VERSION  = "10"
+  # Silences the Next.js telemetry during CI builds
+  NEXT_TELEMETRY_DISABLED = "1"
+
+# Next.js App Router + API routes need the official Netlify adapter
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+# ─── Headers ──────────────────────────────────────────────────────────────────
+# These duplicate what next.config.mjs already injects via Next.js headers()
+# but Netlify CDN edges apply them even before the Next.js runtime is hit.
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options       = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy       = "strict-origin-when-cross-origin"
+    Permissions-Policy    = "camera=(), microphone=(), geolocation=(), payment=()"
+
+# ─── Redirects ────────────────────────────────────────────────────────────────
+# next-intl handles locale routing internally; no redirect rules needed here.

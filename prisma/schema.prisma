@@ -1,0 +1,578 @@
+// prisma/schema.prisma
+// ALMANAR — Full data model
+
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "rhel-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─── Enums ────────────────────────────────────────────────────────────────────
+
+enum Role {
+  STUDENT
+  ADMIN
+}
+
+enum Level {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  CANCELED
+  PAST_DUE
+  TRIALING
+  UNPAID
+  INCOMPLETE
+}
+
+enum BillingInterval {
+  MONTHLY
+  ANNUAL
+}
+
+enum PurchaseStatus {
+  PENDING
+  COMPLETED
+  REFUNDED
+  FAILED
+}
+
+enum AccessType {
+  PURCHASE    // paid à la carte for the course
+  MEMBERSHIP  // granted via active member subscription
+  FREE        // zero-price course, auto-enrolled on claim
+  ADMIN       // admin override grant
+}
+
+enum DiscountType {
+  PERCENT       // discountValue = percentage (e.g. 20 = 20% off)
+  FIXED_AMOUNT  // discountValue = dollars off  (e.g. 5 = $5 off)
+}
+
+enum ReviewStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum ProductCategory {
+  EBOOK
+  PRINTABLE
+  MONTESSORI_MATERIAL
+  TOY_AFFILIATE // affiliate link only — no file delivery
+}
+
+enum ProductLanguage {
+  EN
+  AR
+  BILINGUAL
+}
+
+enum NotificationType {
+  CERTIFICATE_ISSUED
+  REVIEW_APPROVED
+  REVIEW_REJECTED
+  ENROLLMENT_CONFIRMED
+  WISHLIST_ITEM_UPDATED  // reserved for future use
+  SYSTEM                 // generic admin-created notification
+}
+
+// ─── Auth (NextAuth PrismaAdapter tables) ─────────────────────────────────────
+
+model User {
+  id               String    @id @default(cuid())
+  name             String?
+  email            String    @unique
+  emailVerified    DateTime?
+  image            String?
+  password         String?            // bcrypt; null for OAuth users
+  role             Role               @default(STUDENT)
+  stripeCustomerId String?            @unique
+  preferredLocale  String             @default("ar") // "en" | "ar"
+  mailingListAdded Boolean            @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  accounts         Account[]
+  sessions         Session[]
+  enrollments      Enrollment[]
+  subscription     Subscription?
+  coursePurchases  CoursePurchase[]
+  productPurchases ProductPurchase[]
+  downloads        Download[]
+  passwordResets   PasswordResetToken[]
+  progress         LessonProgress[]
+  certificates     Certificate[]
+  reviews          Review[]
+  wishlists        Wishlist[]
+  notifications    Notification[]
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model PasswordResetToken {
+  id        String   @id @default(cuid())
+  email     String
+  token     String   @unique
+  expires   DateTime
+  used      Boolean  @default(false)
+  userId    String
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+}
+
+// ─── Courses ──────────────────────────────────────────────────────────────────
+
+model Course {
+  id            String  @id @default(cuid())
+  slug          String  @unique
+
+  // Bilingual content
+  titleEn       String
+  titleAr       String
+  descriptionEn String  @db.Text
+  descriptionAr String  @db.Text
+  shortDescEn   String
+  shortDescAr   String
+
+  // Media
+  thumbnail       String?
+  previewVideoUrl String?
+
+  // Commerce
+  price        Decimal @db.Decimal(10, 2) // 0.00 = free
+  isMemberOnly Boolean @default(false)    // members get automatic access
+
+  // Taxonomy
+  categoryEn String?
+  categoryAr String?
+  level      Level   @default(BEGINNER)
+
+  // State
+  isPublished   Boolean @default(false)
+  totalDuration Int?    // computed total seconds
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  lessons      Lesson[]
+  enrollments  Enrollment[]
+  purchases    CoursePurchase[]
+  certificates Certificate[]
+  reviews      Review[]
+  wishlists    Wishlist[]
+}
+
+model Lesson {
+  id       String @id @default(cuid())
+  courseId String
+  slug     String
+
+  // Bilingual
+  titleEn       String
+  titleAr       String
+  descriptionEn String? @db.Text
+  descriptionAr String? @db.Text
+
+  // Video delivery
+  // videoUrl  ← NEVER stored here as raw S3. Signed URL is generated per-request.
+  s3Key    String? // raw S3 object key (admin + server only)
+  duration Int?    // seconds
+
+  // Config
+  position    Int
+  isPreview   Boolean @default(false)
+  isPublished Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  course   Course           @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  progress LessonProgress[]
+
+  @@unique([courseId, slug])
+  @@index([courseId, position])
+}
+
+model LessonProgress {
+  id          String   @id @default(cuid())
+  userId      String
+  lessonId    String
+  completedAt DateTime @default(now())
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lesson Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, lessonId])
+}
+
+// ─── Membership ───────────────────────────────────────────────────────────────
+
+model MembershipPlan {
+  id String @id @default(cuid())
+
+  // Bilingual
+  nameEn        String
+  nameAr        String
+  descriptionEn String?
+  descriptionAr String?
+  featuresEn    String[]
+  featuresAr    String[]
+
+  // Pricing
+  monthlyPrice Decimal @db.Decimal(10, 2)
+  annualPrice  Decimal @db.Decimal(10, 2)
+
+  // Stripe price IDs — one per billing interval
+  stripePriceIdMonthly String @unique
+  stripePriceIdAnnual  String @unique
+
+  isActive Boolean @default(true)
+
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  subscriptions Subscription[]
+}
+
+model Subscription {
+  id                   String             @id @default(cuid())
+  userId               String             @unique
+  planId               String
+  stripeSubscriptionId String             @unique
+  stripeCustomerId     String
+  status               SubscriptionStatus
+  interval             BillingInterval
+  currentPeriodStart   DateTime
+  currentPeriodEnd     DateTime
+  cancelAtPeriodEnd    Boolean            @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  plan MembershipPlan @relation(fields: [planId], references: [id])
+}
+
+// ─── Course Purchases & Enrollments ───────────────────────────────────────────
+
+model CoursePurchase {
+  id                    String         @id @default(cuid())
+  userId                String
+  courseId              String
+  stripeSessionId       String?        @unique
+  stripePaymentIntentId String?        @unique
+  amount                Decimal        @db.Decimal(10, 2)
+  currency              String         @default("usd")
+  status                PurchaseStatus @default(PENDING)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user       User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  course     Course      @relation(fields: [courseId], references: [id])
+  enrollment Enrollment?
+}
+
+model Enrollment {
+  id         String     @id @default(cuid())
+  userId     String
+  courseId   String
+  purchaseId String?    @unique // null for membership / free / admin grants
+  accessType AccessType @default(PURCHASE)
+
+  completedAt DateTime?
+  createdAt   DateTime  @default(now())
+
+  user     User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  course   Course          @relation(fields: [courseId], references: [id])
+  purchase CoursePurchase? @relation(fields: [purchaseId], references: [id])
+
+  @@unique([userId, courseId])
+}
+
+// ─── Digital Product Store ────────────────────────────────────────────────────
+
+model Product {
+  id   String @id @default(cuid())
+  slug String @unique
+
+  // Bilingual
+  titleEn       String
+  titleAr       String
+  descriptionEn String @db.Text
+  descriptionAr String @db.Text
+
+  // Commerce
+  price    Decimal         @db.Decimal(10, 2) // 0.00 = free
+  isFree   Boolean         @default(false)    // true when price == 0.00
+  category ProductCategory
+  language ProductLanguage @default(BILINGUAL)
+
+  // Delivery
+  coverImage   String?
+  s3Key        String? // file key for downloadable products; null for TOY_AFFILIATE
+  affiliateUrl String? // TOY_AFFILIATE only
+
+  // Config
+  isPublished Boolean @default(false)
+  sortOrder   Int     @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  purchases   ProductPurchase[]
+  bundleItems BundleItem[]
+  reviews     Review[]
+  wishlists   Wishlist[]
+}
+
+model Bundle {
+  id   String @id @default(cuid())
+  slug String @unique
+
+  // Bilingual
+  titleEn       String
+  titleAr       String
+  descriptionEn String @db.Text
+  descriptionAr String @db.Text
+
+  price      Decimal @db.Decimal(10, 2)
+  coverImage String?
+  isPublished Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  items     BundleItem[]
+  purchases ProductPurchase[]
+}
+
+// ─── Coupons ──────────────────────────────────────────────────────────────────
+
+model Coupon {
+  id            String       @id @default(cuid())
+  code          String       @unique           // e.g. "SUMMER25"
+  discountType  DiscountType
+  discountValue Decimal      @db.Decimal(10, 2) // 25 = 25% off OR $25 off
+
+  // Scope — all null = applies to any purchase
+  courseId  String?
+  productId String?
+  bundleId  String?
+
+  // Usage limits
+  usageLimit Int?   // null = unlimited
+  usageCount Int    @default(0)
+
+  // Validity window
+  validFrom  DateTime  @default(now())
+  validUntil DateTime? // null = never expires
+
+  isActive Boolean @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  redemptions CouponRedemption[]
+}
+
+model CouponRedemption {
+  id        String @id @default(cuid())
+  couponId  String
+  userId    String
+  orderId   String // CoursePurchase.id | ProductPurchase.id
+  orderType String // "course" | "product" | "bundle"
+  discount  Decimal @db.Decimal(10, 2)
+
+  createdAt DateTime @default(now())
+
+  coupon Coupon @relation(fields: [couponId], references: [id])
+
+  @@unique([couponId, orderId]) // one redemption per order
+}
+
+model BundleItem {
+  id        String @id @default(cuid())
+  bundleId  String
+  productId String
+
+  bundle  Bundle  @relation(fields: [bundleId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([bundleId, productId])
+}
+
+// ─── Product Purchases & Downloads ────────────────────────────────────────────
+
+// Covers single-product purchase, bundle purchase, and free claims
+model ProductPurchase {
+  id String @id @default(cuid())
+
+  userId String
+
+  // Exactly one of productId or bundleId is set
+  productId String?
+  bundleId  String?
+
+  stripeSessionId       String?        @unique // null for free claims
+  stripePaymentIntentId String?        @unique
+  amount                Decimal        @db.Decimal(10, 2)
+  currency              String         @default("usd")
+  status                PurchaseStatus @default(PENDING)
+  isFree                Boolean        @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product   Product?  @relation(fields: [productId], references: [id])
+  bundle    Bundle?   @relation(fields: [bundleId], references: [id])
+  downloads Download[]
+}
+
+// One Download row = one secure link for one (user × product) pair.
+// Bundle purchases create one Download row per product inside the bundle.
+model Download {
+  id         String @id @default(cuid())
+  userId     String
+  purchaseId String
+  productId  String // always a single Product (even for bundle deliveries)
+
+  token         String   @unique @default(cuid()) // opaque token used in the URL
+  expiresAt     DateTime
+  downloadCount Int      @default(0)
+  maxDownloads  Int      @default(5)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user     User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  purchase ProductPurchase @relation(fields: [purchaseId], references: [id], onDelete: Cascade)
+}
+
+// ─── Certificates ──────────────────────────────────────────────────────────────
+
+// One certificate per (user, course) pair.
+// `code` is a short, URL-safe token used in the public shareable link.
+model Certificate {
+  id       String @id @default(cuid())
+  code     String @unique @default(cuid()) // /certificates/[code]
+
+  userId   String
+  courseId String
+
+  issuedAt DateTime @default(now())
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, courseId]) // exactly one certificate per (student, course)
+}
+
+// ─── Reviews ───────────────────────────────────────────────────────────────────
+
+// One review per (user, course) or (user, product).
+// courseId and productId are mutually exclusive — exactly one must be set.
+model Review {
+  id        String       @id @default(cuid())
+  userId    String
+  courseId  String?
+  productId String?
+
+  rating    Int          // 1–5
+  comment   String?      @db.Text
+
+  status    ReviewStatus @default(PENDING)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user    User     @relation(fields: [userId],    references: [id], onDelete: Cascade)
+  course  Course?  @relation(fields: [courseId],  references: [id], onDelete: Cascade)
+  product Product? @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, courseId])   // one review per user per course
+  @@unique([userId, productId])  // one review per user per product
+}
+
+// ─── Wishlist ─────────────────────────────────────────────────────────────────
+
+model Wishlist {
+  id        String   @id @default(cuid())
+  userId    String
+  courseId  String?
+  productId String?
+  createdAt DateTime @default(now())
+
+  user    User     @relation(fields: [userId],    references: [id], onDelete: Cascade)
+  course  Course?  @relation(fields: [courseId],  references: [id], onDelete: Cascade)
+  product Product? @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, courseId])   // one wishlist entry per user per course
+  @@unique([userId, productId])  // one wishlist entry per user per product
+}
+
+// ─── Notifications ────────────────────────────────────────────────────────────
+
+model Notification {
+  id       String           @id @default(cuid())
+  userId   String
+  type     NotificationType
+  titleEn  String
+  titleAr  String
+  bodyEn   String?
+  bodyAr   String?
+  link     String?          // relative URL, e.g. /en/certificates/abc123
+  readAt   DateTime?        // null = unread
+
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, readAt])
+  @@index([userId, createdAt(sort: Desc)])
+}

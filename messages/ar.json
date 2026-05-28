@@ -1,0 +1,356 @@
+{
+  "metadata": {
+    "brand": "المنار",
+    "title": "المنار — منصة تعليم الوالدين",
+    "description": "دورات تدريبية متخصصة في تربية الأطفال، موارد منتسوري، ومكتبة رقمية متكاملة للوالدين الواعيين."
+  },
+
+  "common": {
+    "brand": "المنار",
+    "tagline": "منارة التربية والأسرة",
+    "nav": {
+      "home":      "الرئيسية",
+      "courses":   "الدورات",
+      "store":     "المتجر",
+      "pricing":   "العضوية",
+      "dashboard": "لوحتي",
+      "admin":     "الإدارة",
+      "signin":    "تسجيل الدخول",
+      "signup":    "ابدأ الآن",
+      "signout":   "تسجيل الخروج",
+      "account":   "حسابي"
+    },
+    "actions": {
+      "learnMore":  "اعرف المزيد",
+      "viewAll":    "عرض الكل",
+      "buy":        "اشتر الآن",
+      "enroll":     "سجّل الآن",
+      "subscribe":  "اشترك",
+      "cancel":     "إلغاء",
+      "save":       "حفظ",
+      "saving":     "جارٍ الحفظ...",
+      "edit":       "تعديل",
+      "delete":     "حذف",
+      "back":       "رجوع",
+      "continue":   "متابعة",
+      "download":   "تنزيل",
+      "claim":      "احصل عليه مجانًا",
+      "close":      "إغلاق",
+      "confirm":    "تأكيد",
+      "tryAgain":   "حاول مجددًا"
+    },
+    "status": {
+      "loading":    "جارٍ التحميل...",
+      "error":      "حدث خطأ ما. يرجى المحاولة مجددًا.",
+      "success":    "تم بنجاح!",
+      "comingSoon": "قريبًا",
+      "required":   "مطلوب",
+      "optional":   "اختياري"
+    },
+    "pagination": {
+      "previous": "السابق",
+      "next":     "التالي",
+      "page":     "صفحة {current} من {total}"
+    },
+    "footer": {
+      "rights":  "جميع الحقوق محفوظة.",
+      "privacy": "سياسة الخصوصية",
+      "terms":   "شروط الخدمة",
+      "contact": "تواصل معنا"
+    }
+  },
+
+  "auth": {
+    "signInTitle":           "مرحبًا بعودتك",
+    "signInDescription":     "سجّل دخولك إلى حساب المنار",
+    "signUpTitle":           "إنشاء حساب جديد",
+    "signUpDescription":     "انضم إلى مجتمع المنار للآباء والأمهات",
+    "forgotPasswordTitle":   "إعادة تعيين كلمة المرور",
+    "forgotPasswordDescription": "أدخل بريدك الإلكتروني وسنرسل لك رابط إعادة التعيين",
+    "resetPasswordTitle":    "تعيين كلمة مرور جديدة",
+    "resetPasswordDescription": "اختر كلمة مرور قوية لحسابك",
+
+    "name":            "الاسم الكامل",
+    "email":           "البريد الإلكتروني",
+    "password":        "كلمة المرور",
+    "newPassword":     "كلمة المرور الجديدة",
+    "confirmPassword": "تأكيد كلمة المرور",
+    "passwordHint":    "8 أحرف على الأقل",
+
+    "signIn":          "تسجيل الدخول",
+    "createAccount":   "إنشاء الحساب",
+    "sendResetLink":   "إرسال رابط الإعادة",
+    "resetPassword":   "تحديث كلمة المرور",
+    "forgotPassword":  "نسيت كلمة المرور؟",
+    "backToSignIn":    "العودة لتسجيل الدخول",
+
+    "noAccount":   "ليس لديك حساب؟",
+    "haveAccount": "لديك حساب بالفعل؟",
+
+    "invalidCredentials": "البريد الإلكتروني أو كلمة المرور غير صحيحة",
+    "sessionExpired":     "انتهت جلستك. يرجى تسجيل الدخول مجددًا.",
+    "genericError":       "حدث خطأ ما. يرجى المحاولة مجددًا.",
+    "emailTaken":         "يوجد حساب بهذا البريد الإلكتروني بالفعل",
+    "passwordMismatch":   "كلمتا المرور غير متطابقتين",
+    "passwordTooShort":   "يجب أن تتكون كلمة المرور من 8 أحرف على الأقل",
+    "invalidResetLink":   "رابط إعادة التعيين غير صالح أو مستخدم مسبقًا.",
+
+    "resetEmailSent":       "تم إرسال رابط إعادة التعيين! تحقق من بريدك الوارد.",
+    "passwordResetSuccess": "تم تحديث كلمة المرور — جارٍ التوجيه لتسجيل الدخول…"
+  },
+
+  "home": {
+    "hero": {
+      "badge":        "تعليم الوالدين المميز",
+      "title":        "أنشئ جيلًا واثقًا ومزدهرًا",
+      "subtitle":     "دورات متخصصة، موارد منتسوري، ومكتبة رقمية متكاملة — كل ما تحتاجه في مكان واحد موثوق.",
+      "cta":          "استكشف الدورات",
+      "ctaSecondary": "تعرّف على العضوية"
+    },
+    "features": {
+      "title":    "كل ما تحتاجه كوالد",
+      "subtitle": "محتوى مُعدّ بعناية لدعم رحلتك في التربية",
+      "courses": {
+        "title": "دورات متخصصة",
+        "desc":  "تعلّم منهجي قائم على الأدلة من متخصصين معتمدين في تطوير الطفل"
+      },
+      "store": {
+        "title": "مكتبة الموارد الرقمية",
+        "desc":  "كتب إلكترونية، ملفات طباعة، ومواد منتسوري متاحة فورًا"
+      },
+      "membership": {
+        "title": "وصول بالعضوية",
+        "desc":  "وصول غير محدود إلى مكتبتنا المتنامية من المحتوى الحصري"
+      }
+    },
+    "coursesTeaser": {
+      "title":   "دورات مميزة",
+      "viewAll": "عرض جميع الدورات"
+    },
+    "storeTeaser": {
+      "title":   "من المتجر الرقمي",
+      "viewAll": "تصفّح المتجر"
+    }
+  },
+
+  "courses": {
+    "catalog": {
+      "title":              "جميع الدورات",
+      "subtitle":           "تعليم الوالدين القائم على الدليل، بوتيرتك الخاصة",
+      "searchPlaceholder":  "ابحث في الدورات...",
+      "noResults":          "لا توجد دورات تطابق تصفيتك",
+      "filterAll":          "جميع المستويات",
+      "filterBeginner":     "مبتدئ",
+      "filterIntermediate": "متوسط",
+      "filterAdvanced":     "متقدم",
+      "memberOnlyBadge":    "للأعضاء فقط",
+      "freeBadge":          "مجاني",
+      "lessons":            "{count} درس",
+      "duration":           "{duration} إجمالًا"
+    },
+    "detail": {
+      "enroll":          "سجّل الآن",
+      "buyFor":          "اشتر بـ {price}",
+      "memberAccess":    "مُدرج في العضوية",
+      "preview":         "معاينة",
+      "free":            "مجاني",
+      "lessonsCount":    "{count} درس",
+      "durationLabel":   "المدة الإجمالية",
+      "levelLabel":      "المستوى",
+      "previewLesson":   "معاينة الدرس",
+      "lockedLesson":    "سجّل للوصول",
+      "signInToEnroll":  "سجّل دخولك للتسجيل",
+      "alreadyEnrolled": "متابعة التعلم",
+      "includes":        "تتضمن هذه الدورة"
+    },
+    "player": {
+      "complete":     "وضع علامة كمكتمل",
+      "completed":    "مكتمل",
+      "nextLesson":   "الدرس التالي",
+      "prevLesson":   "الدرس السابق",
+      "progress":     "{percent}% مكتمل",
+      "lessonNumber": "الدرس {number}",
+      "backToCourse": "العودة إلى الدورة",
+      "noAccess":     "ليس لديك صلاحية الوصول لهذا الدرس.",
+      "enroll":       "سجّل للوصول إلى جميع الدروس"
+    }
+  },
+
+  "store": {
+    "title":    "المتجر الرقمي",
+    "subtitle": "موارد لدعم كل مرحلة من رحلتك في التربية",
+    "categories": {
+      "all":        "الكل",
+      "ebook":      "كتب إلكترونية",
+      "printable":  "ملفات للطباعة",
+      "montessori": "مواد منتسوري",
+      "toy":        "توصيات الألعاب"
+    },
+    "languages": {
+      "en":        "إنجليزي",
+      "ar":        "عربي",
+      "bilingual": "ثنائي اللغة"
+    },
+    "freeBadge":       "مجاني",
+    "claimFree":       "احصل عليه مجانًا",
+    "buyNow":          "اشتر الآن",
+    "buyFor":          "اشتر بـ {price}",
+    "download":        "تنزيل",
+    "affiliateLink":   "عرض التوصية",
+    "downloadExpiry":  "رابط التنزيل صالح لمدة 48 ساعة",
+    "redownload":      "الحصول على رابط تنزيل جديد",
+    "downloadsLeft":   "{count} تنزيلات متبقية",
+    "claimSuccess":    "تمت الإضافة إلى تنزيلاتك!",
+    "claimSignIn":     "سجّل دخولك للحصول على هذا المورد المجاني",
+    "bundleBadge":     "حزمة"
+  },
+
+  "pricing": {
+    "title":          "أسعار واضحة وشفافة",
+    "subtitle":       "انضم إلى آلاف الوالدين الواعيين",
+    "monthly":        "شهري",
+    "annual":         "سنوي",
+    "savePercent":    "وفّر {percent}%",
+    "perMonth":       "/ شهر",
+    "perYear":        "/ سنة",
+    "billedAnnually": "يُدفع سنويًا",
+    "subscribe":      "ابدأ العضوية",
+    "currentPlan":    "خطتك الحالية",
+    "cancelAnytime":  "إلغاء في أي وقت",
+    "includes":       "العضوية تشمل",
+    "orBuyALaCarte":  "أو اشترِ دورات منفردة",
+    "faq":            "الأسئلة الشائعة"
+  },
+
+  "dashboard": {
+    "title":    "تعلّمي",
+    "greeting": "مرحبًا بعودتك، {name}",
+    "tabs": {
+      "courses":    "دوراتي",
+      "downloads":  "تنزيلاتي",
+      "membership": "العضوية"
+    },
+    "courses": {
+      "empty":    "لم تسجّل في أي دورة بعد",
+      "browse":   "تصفّح الدورات",
+      "progress": "{percent}% مكتمل",
+      "continue": "متابعة التعلم",
+      "start":    "ابدأ التعلم"
+    },
+    "downloads": {
+      "empty":        "لا توجد تنزيلات بعد",
+      "browseStore":  "تصفّح المتجر",
+      "expires":      "تنتهي الصلاحية {date}",
+      "expired":      "انتهت الصلاحية",
+      "redownload":   "الحصول على رابط جديد",
+      "limitReached": "تم الوصول إلى الحد الأقصى للتنزيل",
+      "downloadNow":  "تنزيل الآن"
+    },
+    "membership": {
+      "active":     "عضو نشط",
+      "inactive":   "لا توجد عضوية نشطة",
+      "renewsOn":   "يتجدد في {date}",
+      "cancelsOn":  "الوصول حتى {date}",
+      "manage":     "إدارة الاشتراك",
+      "subscribe":  "احصل على العضوية",
+      "cancelNote": "يمكنك الإلغاء في أي وقت من إعدادات اشتراكك."
+    }
+  },
+
+  "admin": {
+    "nav": {
+      "overview":  "نظرة عامة",
+      "courses":   "الدورات",
+      "products":  "المنتجات",
+      "bundles":   "الحزم",
+      "users":     "المستخدمون",
+      "analytics": "التحليلات"
+    },
+    "overview": {
+      "title":         "لوحة التحكم",
+      "enrollments":   "إجمالي التسجيلات",
+      "revenue":       "إجمالي الإيرادات",
+      "activeMembers": "الأعضاء النشطون",
+      "downloads":     "إجمالي التنزيلات"
+    },
+    "courses": {
+      "title":         "الدورات",
+      "new":           "دورة جديدة",
+      "published":     "منشور",
+      "draft":         "مسودة",
+      "memberOnly":    "للأعضاء فقط",
+      "edit":          "تعديل الدورة",
+      "lessons":       "إدارة الدروس",
+      "deleteConfirm": "هل أنت متأكد من حذف هذه الدورة؟"
+    },
+    "products": {
+      "title":         "المنتجات الرقمية",
+      "new":           "منتج جديد",
+      "edit":          "تعديل المنتج",
+      "deleteConfirm": "هل أنت متأكد من حذف هذا المنتج؟"
+    },
+    "bundles": {
+      "title": "الحزم",
+      "new":   "حزمة جديدة"
+    },
+    "users": {
+      "title":       "المستخدمون",
+      "search":      "ابحث في المستخدمين...",
+      "role":        "الدور",
+      "enrolled":    "الدورات المسجّلة",
+      "joined":      "تاريخ الانضمام",
+      "grantAccess": "منح صلاحية الدورة"
+    },
+    "analytics": {
+      "title":         "التحليلات",
+      "enrollments":   "التسجيلات",
+      "revenue":       "الإيرادات",
+      "activeMembers": "الأعضاء النشطون",
+      "downloads":     "التنزيلات",
+      "last30days":    "آخر 30 يومًا",
+      "allTime":       "منذ البداية",
+      "byCourse":      "الإيرادات حسب الدورة",
+      "byProduct":     "الإيرادات حسب المنتج",
+      "studentList":   "قائمة الطلاب"
+    },
+    "upload": {
+      "selectFile":    "اختر ملفًا",
+      "uploading":     "جارٍ الرفع...",
+      "uploadSuccess": "تم رفع الملف",
+      "uploadError":   "فشل الرفع"
+    }
+  },
+
+  "emails": {
+    "welcome": {
+      "subject":  "مرحبًا بك في المنار",
+      "greeting": "مرحبًا، {name}!",
+      "body":     "تم إنشاء حسابك بنجاح. ابدأ باستكشاف دوراتنا ومواردنا.",
+      "cta":      "استكشف الدورات"
+    },
+    "enrollmentConfirmation": {
+      "subject": "تم تسجيلك في {courseTitle}",
+      "body":    "أصبح لديك وصول كامل إلى {courseTitle}. تعلّم بالوتيرة التي تناسبك.",
+      "cta":     "ابدأ التعلم"
+    },
+    "purchaseReceipt": {
+      "subject":  "إيصال شراءك من المنار",
+      "body":     "شكرًا لشراءك. رابط التنزيل أدناه.",
+      "download": "تنزيل الملف",
+      "expiry":   "ينتهي هذا الرابط خلال 48 ساعة."
+    },
+    "passwordReset": {
+      "subject":  "إعادة تعيين كلمة مرور المنار",
+      "body":     "طلبت إعادة تعيين كلمة المرور. انقر الرابط أدناه لتعيين كلمة مرور جديدة.",
+      "cta":      "إعادة تعيين كلمة المرور",
+      "expiry":   "ينتهي هذا الرابط خلال ساعة واحدة.",
+      "ignore":   "إذا لم تطلب هذا، يمكنك تجاهل هذا البريد."
+    },
+    "freeClaim": {
+      "subject":  "موردك المجاني من المنار",
+      "body":     "موردك المجاني جاهز للتنزيل.",
+      "download": "تنزيل الآن",
+      "expiry":   "ينتهي هذا الرابط خلال 48 ساعة."
+    }
+  }
+}
