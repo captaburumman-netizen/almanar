@@ -1,9 +1,3 @@
-/**
- * PlanForm — create or edit a MembershipPlan.
- *
- * Features are stored as string[] in DB.
- * In the form they're edited as newline-separated text areas.
- */
 'use client'
 
 import { useState }  from 'react'
@@ -25,21 +19,20 @@ interface Plan {
 }
 
 interface PlanFormProps {
-  plan?:   Plan
-  locale:  string
+  plan?:  Plan
+  locale: string
 }
 
-function arrToText(arr: string[]) {
-  return arr.join('\n')
-}
-function textToArr(text: string): string[] {
-  return text.split('\n').map((s) => s.trim()).filter(Boolean)
-}
+const INPUT = 'w-full rounded-lg border border-stone-300 bg-white px-3 py-2 text-sm text-stone-900 placeholder:text-stone-400 focus:border-stone-500 focus:outline-none focus:ring-2 focus:ring-stone-200 transition-colors'
+const CARD  = 'rounded-xl border border-stone-200 bg-white p-6 shadow-sm space-y-4'
+const LABEL = 'block text-sm font-medium text-stone-700 mb-1.5'
+
+function arrToText(arr: string[]) { return arr.join('\n') }
+function textToArr(text: string)  { return text.split('\n').map(s => s.trim()).filter(Boolean) }
 
 export function PlanForm({ plan, locale }: PlanFormProps) {
   const router = useRouter()
   const isEdit = !!plan
-  const isAr   = locale === 'ar'
 
   const [values, setValues] = useState({
     nameEn:               plan?.nameEn               ?? '',
@@ -57,7 +50,7 @@ export function PlanForm({ plan, locale }: PlanFormProps) {
   const [error, setError] = useState<string | null>(null)
 
   function set(k: keyof typeof values, v: string) {
-    setValues((prev) => ({ ...prev, [k]: v }))
+    setValues(prev => ({ ...prev, [k]: v }))
   }
 
   async function submit(e: React.FormEvent) {
@@ -81,8 +74,7 @@ export function PlanForm({ plan, locale }: PlanFormProps) {
     try {
       const url    = isEdit ? `/api/admin/plans/${plan!.id}` : '/api/admin/plans'
       const method = isEdit ? 'PATCH' : 'POST'
-
-      const res = await fetch(url, {
+      const res    = await fetch(url, {
         method,
         headers: { 'Content-Type': 'application/json' },
         body:    JSON.stringify(payload),
@@ -107,198 +99,117 @@ export function PlanForm({ plan, locale }: PlanFormProps) {
   }
 
   return (
-    <form onSubmit={(e) => void submit(e)} className="space-y-6">
+    <form onSubmit={e => void submit(e)} className="space-y-5">
 
-      {/* ── Names ────────────────────────────────────────────────────────── */}
-      <section className="card-brand p-6 space-y-4">
-        <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">
-          {isAr ? 'الاسم' : 'Name'}
-        </h2>
+      {/* Names */}
+      <div className={CARD}>
+        <h2 className="text-xs font-semibold uppercase tracking-wider text-stone-400">Name</h2>
         <div className="grid sm:grid-cols-2 gap-4">
-          <label className="space-y-1.5">
-            <span className="text-sm font-medium text-foreground">Name (EN)</span>
-            <input
-              type="text"
-              value={values.nameEn}
-              onChange={(e) => set('nameEn', e.target.value)}
-              className="input-brand w-full"
-              required
-            />
-          </label>
-          <label className="space-y-1.5">
-            <span className="text-sm font-medium text-foreground">الاسم (AR)</span>
-            <input
-              dir="rtl"
-              type="text"
-              value={values.nameAr}
-              onChange={(e) => set('nameAr', e.target.value)}
-              className="input-brand w-full"
-              required
-            />
-          </label>
+          <div>
+            <label className={LABEL}>Name (English)</label>
+            <input type="text" value={values.nameEn} onChange={e => set('nameEn', e.target.value)}
+              className={INPUT} placeholder="e.g. Pro Plan" required />
+          </div>
+          <div>
+            <label className={LABEL}>الاسم (عربي)</label>
+            <input dir="rtl" type="text" value={values.nameAr} onChange={e => set('nameAr', e.target.value)}
+              className={INPUT} placeholder="مثال: الخطة المتقدمة" required />
+          </div>
         </div>
-      </section>
+      </div>
 
-      {/* ── Descriptions ─────────────────────────────────────────────────── */}
-      <section className="card-brand p-6 space-y-4">
-        <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">
-          {isAr ? 'الوصف' : 'Description'}
-        </h2>
+      {/* Descriptions */}
+      <div className={CARD}>
+        <h2 className="text-xs font-semibold uppercase tracking-wider text-stone-400">Description (optional)</h2>
         <div className="grid sm:grid-cols-2 gap-4">
-          <label className="space-y-1.5">
-            <span className="text-sm font-medium text-foreground">Description (EN)</span>
-            <textarea
-              rows={2}
-              value={values.descriptionEn}
-              onChange={(e) => set('descriptionEn', e.target.value)}
-              className="input-brand w-full resize-none"
-            />
-          </label>
-          <label className="space-y-1.5">
-            <span className="text-sm font-medium text-foreground">الوصف (AR)</span>
-            <textarea
-              dir="rtl"
-              rows={2}
-              value={values.descriptionAr}
-              onChange={(e) => set('descriptionAr', e.target.value)}
-              className="input-brand w-full resize-none"
-            />
-          </label>
+          <div>
+            <label className={LABEL}>Description (English)</label>
+            <textarea rows={2} value={values.descriptionEn} onChange={e => set('descriptionEn', e.target.value)}
+              className={`${INPUT} resize-none`} placeholder="Short description…" />
+          </div>
+          <div>
+            <label className={LABEL}>الوصف (عربي)</label>
+            <textarea dir="rtl" rows={2} value={values.descriptionAr} onChange={e => set('descriptionAr', e.target.value)}
+              className={`${INPUT} resize-none`} placeholder="وصف مختصر…" />
+          </div>
         </div>
-      </section>
+      </div>
 
-      {/* ── Features ─────────────────────────────────────────────────────── */}
-      <section className="card-brand p-6 space-y-4">
+      {/* Features */}
+      <div className={CARD}>
         <div>
-          <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">
-            {isAr ? 'المميزات' : 'Features'}
-          </h2>
-          <p className="text-xs text-muted-foreground mt-0.5">
-            {isAr ? 'ميزة واحدة في كل سطر' : 'One feature per line'}
-          </p>
+          <h2 className="text-xs font-semibold uppercase tracking-wider text-stone-400">Features</h2>
+          <p className="text-xs text-stone-400 mt-0.5">One feature per line</p>
         </div>
         <div className="grid sm:grid-cols-2 gap-4">
-          <label className="space-y-1.5">
-            <span className="text-sm font-medium text-foreground">Features (EN)</span>
-            <textarea
-              rows={5}
-              value={values.featuresEnText}
-              onChange={(e) => set('featuresEnText', e.target.value)}
-              placeholder={'Access to all courses\nUnlimited downloads\nCancel anytime'}
-              className="input-brand w-full resize-none font-mono text-xs"
-            />
-          </label>
-          <label className="space-y-1.5">
-            <span className="text-sm font-medium text-foreground">المميزات (AR)</span>
-            <textarea
-              dir="rtl"
-              rows={5}
-              value={values.featuresArText}
-              onChange={(e) => set('featuresArText', e.target.value)}
-              placeholder={'وصول لجميع الدورات\nتنزيلات غير محدودة\nإلغاء في أي وقت'}
-              className="input-brand w-full resize-none font-mono text-xs"
-            />
-          </label>
+          <div>
+            <label className={LABEL}>Features (English)</label>
+            <textarea rows={5} value={values.featuresEnText} onChange={e => set('featuresEnText', e.target.value)}
+              placeholder={"Access to all courses\nUnlimited downloads\nCancel anytime"}
+              className={`${INPUT} resize-none font-mono text-xs`} />
+          </div>
+          <div>
+            <label className={LABEL}>المميزات (عربي)</label>
+            <textarea dir="rtl" rows={5} value={values.featuresArText} onChange={e => set('featuresArText', e.target.value)}
+              placeholder={"وصول لجميع الدورات\nتنزيلات غير محدودة\nإلغاء في أي وقت"}
+              className={`${INPUT} resize-none font-mono text-xs`} />
+          </div>
         </div>
-      </section>
+      </div>
 
-      {/* ── Pricing ──────────────────────────────────────────────────────── */}
-      <section className="card-brand p-6 space-y-4">
-        <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">
-          {isAr ? 'الأسعار (USD)' : 'Pricing (USD)'}
-        </h2>
+      {/* Pricing */}
+      <div className={CARD}>
+        <h2 className="text-xs font-semibold uppercase tracking-wider text-stone-400">Pricing (USD)</h2>
         <div className="grid sm:grid-cols-2 gap-4">
-          <label className="space-y-1.5">
-            <span className="text-sm font-medium text-foreground">
-              {isAr ? 'السعر الشهري' : 'Monthly Price'}
-            </span>
-            <div className="relative">
-              <span className="absolute start-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">$</span>
-              <input
-                type="number"
-                min="0"
-                step="0.01"
-                value={values.monthlyPrice}
-                onChange={(e) => set('monthlyPrice', e.target.value)}
-                className="input-brand w-full ps-7"
-                required
-              />
-            </div>
-          </label>
-          <label className="space-y-1.5">
-            <span className="text-sm font-medium text-foreground">
-              {isAr ? 'السعر السنوي' : 'Annual Price'}
-            </span>
-            <div className="relative">
-              <span className="absolute start-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm">$</span>
-              <input
-                type="number"
-                min="0"
-                step="0.01"
-                value={values.annualPrice}
-                onChange={(e) => set('annualPrice', e.target.value)}
-                className="input-brand w-full ps-7"
-                required
-              />
-            </div>
-          </label>
+          <div>
+            <label className={LABEL}>Monthly Price ($)</label>
+            <input type="number" min="0" step="0.01" value={values.monthlyPrice}
+              onChange={e => set('monthlyPrice', e.target.value)}
+              className={INPUT} placeholder="9.99" required />
+          </div>
+          <div>
+            <label className={LABEL}>Annual Price ($)</label>
+            <input type="number" min="0" step="0.01" value={values.annualPrice}
+              onChange={e => set('annualPrice', e.target.value)}
+              className={INPUT} placeholder="99.99" required />
+          </div>
         </div>
-      </section>
+      </div>
 
-      {/* ── Stripe Price IDs ─────────────────────────────────────────────── */}
-      <section className="card-brand p-6 space-y-4">
+      {/* Stripe IDs */}
+      <div className={CARD}>
         <div>
-          <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">
-            Stripe Price IDs
-          </h2>
-          <p className="text-xs text-muted-foreground mt-0.5">
-            {isAr
-              ? 'انسخ معرّف السعر من لوحة Stripe (يبدأ بـ price_)'
-              : 'Copy the Price ID from your Stripe dashboard (starts with price_)'}
-          </p>
+          <h2 className="text-xs font-semibold uppercase tracking-wider text-stone-400">Stripe Price IDs</h2>
+          <p className="text-xs text-stone-400 mt-0.5">Copy from your Stripe dashboard — starts with <code className="bg-stone-100 px-1 rounded">price_</code></p>
         </div>
         <div className="grid sm:grid-cols-2 gap-4">
-          <label className="space-y-1.5">
-            <span className="text-sm font-medium text-foreground">
-              {isAr ? 'معرّف السعر الشهري' : 'Monthly Price ID'}
-            </span>
-            <input
-              type="text"
-              value={values.stripePriceIdMonthly}
-              onChange={(e) => set('stripePriceIdMonthly', e.target.value)}
-              placeholder="price_..."
-              className="input-brand w-full font-mono text-xs"
-              required
-            />
-          </label>
-          <label className="space-y-1.5">
-            <span className="text-sm font-medium text-foreground">
-              {isAr ? 'معرّف السعر السنوي' : 'Annual Price ID'}
-            </span>
-            <input
-              type="text"
-              value={values.stripePriceIdAnnual}
-              onChange={(e) => set('stripePriceIdAnnual', e.target.value)}
-              placeholder="price_..."
-              className="input-brand w-full font-mono text-xs"
-              required
-            />
-          </label>
+          <div>
+            <label className={LABEL}>Monthly Price ID</label>
+            <input type="text" value={values.stripePriceIdMonthly}
+              onChange={e => set('stripePriceIdMonthly', e.target.value)}
+              placeholder="price_..." className={`${INPUT} font-mono text-xs`} required />
+          </div>
+          <div>
+            <label className={LABEL}>Annual Price ID</label>
+            <input type="text" value={values.stripePriceIdAnnual}
+              onChange={e => set('stripePriceIdAnnual', e.target.value)}
+              placeholder="price_..." className={`${INPUT} font-mono text-xs`} required />
+          </div>
         </div>
-      </section>
+      </div>
 
-      {error && <p className="text-sm text-destructive">{error}</p>}
+      {error && (
+        <div className="rounded-lg bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-700">
+          {error}
+        </div>
+      )}
 
       <button
         type="submit"
         disabled={busy}
-        className="btn-primary px-8 py-2.5 rounded-lg font-semibold disabled:opacity-60"
+        className="rounded-lg bg-stone-900 px-8 py-2.5 text-sm font-semibold text-white hover:bg-stone-700 disabled:opacity-60 transition-colors cursor-pointer"
       >
-        {busy
-          ? (isAr ? 'جارٍ الحفظ…' : 'Saving…')
-          : isEdit
-            ? (isAr ? 'حفظ التغييرات' : 'Save Changes')
-            : (isAr ? 'إنشاء الخطة' : 'Create Plan')}
+        {busy ? 'Saving…' : isEdit ? 'Save Changes' : 'Create Plan'}
       </button>
     </form>
   )
