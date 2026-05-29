@@ -7,6 +7,7 @@
  */
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
+import * as motion from 'motion/react-client'
 
 interface AuthCardProps {
   /** Page heading */
@@ -22,7 +23,12 @@ interface AuthCardProps {
 
 export function AuthCard({ title, description, children, footer, className }: AuthCardProps) {
   return (
-    <div className={cn('w-full max-w-auth space-y-6', className)}>
+    <motion.div
+      className={cn('w-full max-w-auth space-y-6', className)}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4, ease: 'easeOut' }}
+    >
       {/* Brand mark */}
       <div className="text-center space-y-2">
         <Link
@@ -52,6 +58,6 @@ export function AuthCard({ title, description, children, footer, className }: Au
           {footer}
         </div>
       )}
-    </div>
+    </motion.div>
   )
 }

@@ -8,6 +8,7 @@
 'use client'
 
 import Link from 'next/link'
+import { motion } from 'motion/react'
 
 interface SidebarLesson {
   id:        string
@@ -37,7 +38,12 @@ export function LessonSidebar({
   const completedCount = lessons.filter((l) => l.completed).length
 
   return (
-    <div className="rounded-xl border border-border bg-card overflow-hidden lg:sticky lg:top-[72px]">
+    <motion.div
+      className="rounded-xl border border-border bg-card overflow-hidden lg:sticky lg:top-[72px]"
+      initial={{ opacity: 0, x: isAr ? -24 : 24 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.4, ease: 'easeOut' }}
+    >
       {/* Header */}
       <div className="px-4 py-3 border-b border-border bg-muted/40">
         <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
@@ -50,9 +56,11 @@ export function LessonSidebar({
 
       {/* Progress bar */}
       <div className="h-1 bg-muted">
-        <div
-          className="h-full bg-sage transition-all duration-500"
-          style={{ width: `${lessons.length > 0 ? (completedCount / lessons.length) * 100 : 0}%` }}
+        <motion.div
+          className="h-full bg-sage"
+          initial={{ width: 0 }}
+          animate={{ width: `${lessons.length > 0 ? (completedCount / lessons.length) * 100 : 0}%` }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
           role="progressbar"
           aria-valuenow={completedCount}
           aria-valuemin={0}
@@ -66,12 +74,17 @@ export function LessonSidebar({
         className="divide-y divide-border max-h-[calc(100vh-220px)] overflow-y-auto"
         role="list"
       >
-        {lessons.map((lesson) => {
+        {lessons.map((lesson, index) => {
           const isActive = lesson.slug === activeSlug
           const href     = `/${locale}/courses/${courseSlug}/learn?lesson=${lesson.slug}`
 
           return (
-            <li key={lesson.id}>
+            <motion.li
+              key={lesson.id}
+              initial={{ opacity: 0, x: isAr ? -16 : 16 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: index * 0.04, duration: 0.3, ease: 'easeOut' }}
+            >
               <Link
                 href={href}
                 className={[
@@ -128,10 +141,10 @@ export function LessonSidebar({
                   )}
                 </span>
               </Link>
-            </li>
+            </motion.li>
           )
         })}
       </ul>
-    </div>
+    </motion.div>
   )
 }

@@ -11,6 +11,7 @@ import { NavbarMobileMenu }  from './NavbarMobileMenu'
 import { SearchBar }         from '@/components/search/SearchBar'
 import { NotificationBell } from '@/components/notifications/NotificationBell'
 import { getUnreadCount }   from '@/lib/notifications'
+import * as motion           from 'motion/react-client'
 
 const NAV_LINKS = [
   { href: '/courses', key: 'courses' },
@@ -31,7 +32,12 @@ export async function Navbar({ locale }: NavbarProps) {
     : 0
 
   return (
-    <header className="sticky top-0 z-40 w-full">
+    <motion.header
+      className="sticky top-0 z-40 w-full"
+      initial={{ y: -64, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.4, ease: 'easeOut' }}
+    >
       {/* Glass backdrop bar */}
       <div className="absolute inset-0 bg-white/80 backdrop-blur-xl border-b border-stone-200/60" aria-hidden />
 
@@ -122,6 +128,6 @@ export async function Navbar({ locale }: NavbarProps) {
           isAdmin={isAdmin}
         />
       </nav>
-    </header>
+    </motion.header>
   )
 }
