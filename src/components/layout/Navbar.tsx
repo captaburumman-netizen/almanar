@@ -39,7 +39,7 @@ export async function Navbar({ locale }: NavbarProps) {
       transition={{ duration: 0.4, ease: 'easeOut' }}
     >
       {/* Glass backdrop bar */}
-      <div className="absolute inset-0 bg-white/80 backdrop-blur-xl border-b border-stone-200/60" aria-hidden />
+      <div className="absolute inset-0 bg-[#010f23]/90 backdrop-blur-xl border-b border-[#252b37]" aria-hidden />
 
       <nav
         className="container-brand relative flex h-16 items-center justify-between gap-4"
@@ -52,10 +52,10 @@ export async function Navbar({ locale }: NavbarProps) {
           aria-label="ALMANAR — Home"
         >
           {/* Gold accent dot */}
-          <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-gold text-white font-bold text-sm">
+          <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-violet text-white font-bold text-sm">
             {locale === 'ar' ? 'م' : 'A'}
           </span>
-          <span className="text-lg font-bold tracking-tight text-stone-900">
+          <span className="text-lg font-bold tracking-tight text-white">
             {locale === 'ar' ? 'المنار' : 'ALMANAR'}
           </span>
         </Link>
@@ -66,7 +66,7 @@ export async function Navbar({ locale }: NavbarProps) {
             <li key={key}>
               <Link
                 href={href}
-                className="rounded-lg px-4 py-2 text-sm font-medium text-stone-600 hover:bg-stone-100 hover:text-stone-900 transition-colors duration-150"
+                className="rounded-lg px-4 py-2 text-sm font-medium text-white/70 hover:bg-white/10 hover:text-white transition-colors duration-150"
               >
                 {t(key)}
               </Link>
@@ -85,20 +85,20 @@ export async function Navbar({ locale }: NavbarProps) {
               {isAdmin && (
                 <Link
                   href="/admin"
-                  className="rounded-lg px-3 py-2 text-sm font-medium text-stone-500 hover:bg-stone-100 hover:text-stone-800 transition-colors"
+                  className="rounded-lg px-3 py-2 text-sm font-medium text-white/60 hover:bg-white/10 hover:text-white transition-colors"
                 >
                   {t('admin')}
                 </Link>
               )}
               <Link
                 href="/dashboard"
-                className="rounded-lg px-4 py-2 text-sm font-medium text-stone-700 hover:bg-stone-100 transition-colors"
+                className="rounded-lg px-4 py-2 text-sm font-medium text-white/80 hover:bg-white/10 transition-colors"
               >
                 {t('dashboard')}
               </Link>
               <a
                 href="/api/auth/signout"
-                className="rounded-lg px-3 py-2 text-sm text-stone-500 hover:bg-stone-100 hover:text-stone-800 transition-colors"
+                className="rounded-lg px-3 py-2 text-sm text-white/50 hover:bg-white/10 hover:text-white transition-colors"
               >
                 {t('signout')}
               </a>
@@ -107,13 +107,13 @@ export async function Navbar({ locale }: NavbarProps) {
             <>
               <Link
                 href="/auth/signin"
-                className="rounded-lg px-4 py-2 text-sm font-medium text-stone-700 hover:bg-stone-100 transition-colors"
+                className="rounded-lg px-4 py-2 text-sm font-medium text-white/80 hover:bg-white/10 transition-colors"
               >
                 {t('signin')}
               </Link>
               <Link
                 href="/auth/signup"
-                className="rounded-lg bg-stone-900 px-5 py-2 text-sm font-semibold text-white hover:bg-stone-800 transition-colors shadow-brand-sm"
+                className="rounded-full bg-violet px-5 py-2 text-sm font-semibold text-white hover:bg-violet-dark transition-colors shadow-violet"
               >
                 {t('signup')}
               </Link>

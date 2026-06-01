@@ -4,64 +4,54 @@
 
 @layer base {
   :root {
-    /* shadcn/ui semantic tokens — ALMANAR Premium */
-    --background:           60 9% 98%;     /* #FAFAF9 stone-50       */
-    --foreground:           30 7% 11%;     /* #1C1917 stone-900      */
+    /* ── Flux Academy dark navy theme ── */
+    --background:           215 94% 7%;     /* #010f23 deep navy      */
+    --foreground:           0 0% 100%;      /* #ffffff white          */
 
-    --card:                 0 0% 100%;     /* pure white             */
-    --card-foreground:      30 7% 11%;
+    --card:                 222 90% 12%;    /* #03133a dark navy card */
+    --card-foreground:      0 0% 100%;
 
-    --popover:              0 0% 100%;
-    --popover-foreground:   30 7% 11%;
+    --popover:              222 90% 12%;
+    --popover-foreground:   0 0% 100%;
 
-    --primary:              41 96% 40%;    /* #CA8A04 gold           */
-    --primary-foreground:   30 7% 11%;     /* dark text on gold (7.6:1 contrast) */
+    --primary:              252 92% 66%;    /* #7A5AF8 violet         */
+    --primary-foreground:   0 0% 100%;
 
-    --secondary:            30 6% 25%;     /* #44403C dark stone     */
-    --secondary-foreground: 0 0% 98%;
+    --secondary:            220 20% 18%;    /* #252b37 dark surface   */
+    --secondary-foreground: 0 0% 100%;
 
-    --muted:                40 10% 96%;    /* #F5F5F4 stone-100      */
-    --muted-foreground:     30 5% 45%;     /* #78716C stone-500      */
+    --muted:                214 100% 13%;   /* #001c42 dark blue      */
+    --muted-foreground:     220 6% 47%;     /* #717680 gray           */
 
-    --accent:               38 92% 96%;    /* #FFFBEB gold tint bg   */
-    --accent-foreground:    41 96% 30%;    /* dark gold text         */
+    --accent:               249 93% 76%;    /* #9B8AFB light violet   */
+    --accent-foreground:    215 94% 7%;     /* navy text on light     */
 
     --destructive:          0 72% 51%;
     --destructive-foreground: 0 0% 98%;
 
-    --border:               30 6% 90%;     /* #E7E5E4 stone-200      */
-    --input:                30 6% 90%;
-    --ring:                 41 96% 40%;    /* gold focus ring        */
-    --radius:               0.5rem;
+    --border:               220 20% 18%;    /* #252b37 subtle border  */
+    --input:                220 20% 18%;
+    --ring:                 252 92% 66%;    /* violet focus ring      */
+    --radius:               0.75rem;
 
-    /* ALMANAR extended tokens — keep for backward compat */
-    --sand:              #F5EFE0;
-    --sand-light:        #FAF7F2;
-    --sand-dark:         #E8DCC8;
-    --terracotta:        #C4622D;
-    --terracotta-dark:   #A84F23;
-    --terracotta-light:  #F0D4C4;
-    --sage:              #7A9E7E;
-    --sage-light:        #C5D9C6;
-    --warm-brown:        #3D2B1F;
-    --warm-charcoal:     #5C4033;
-    --brand-muted:       #9A8778;
-    --brand-border:      #DDD4C5;
+    /* ── Extended brand tokens ── */
+    --violet:         #7A5AF8;
+    --violet-light:   #9B8AFB;
+    --violet-dark:    #4932a1;
+    --violet-glow:    rgba(122, 90, 248, 0.25);
 
-    /* New premium tokens */
+    --navy:           #010f23;
+    --navy-card:      #03133a;
+    --navy-surface:   #252b37;
+    --navy-deep:      #001c42;
+
+    /* Legacy tokens — kept for admin compatibility */
     --gold:              #CA8A04;
     --gold-light:        #FEF9EC;
     --gold-dark:         #92400E;
-    --stone-950:         #0C0A09;
-    --stone-900:         #1C1917;
-    --stone-800:         #292524;
-    --stone-700:         #44403C;
-    --stone-600:         #57534E;
-    --stone-500:         #78716C;
-    --stone-400:         #A8A29E;
-    --stone-200:         #E7E5E4;
-    --stone-100:         #F5F5F4;
-    --stone-50:          #FAFAF9;
+    --terracotta:        #C4622D;
+    --sage:              #7A9E7E;
+    --sage-light:        #C5D9C6;
   }
 
   /* Base resets */
@@ -80,7 +70,7 @@
 
   body {
     @apply bg-background text-foreground;
-    font-family: var(--font-dm-sans), system-ui, sans-serif;
+    font-family: var(--font-geist-sans), system-ui, sans-serif;
     font-feature-settings: "rlig" 1, "calt" 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -95,15 +85,15 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    color: #1C1917;
+    color: #ffffff;
     font-feature-settings: "ss01" 1;
   }
 
   a { @apply cursor-pointer; }
 
   ::selection {
-    background-color: #FEF9EC;
-    color: #92400E;
+    background-color: rgba(122, 90, 248, 0.3);
+    color: #ffffff;
   }
 }
 
@@ -118,84 +108,88 @@
     @apply mx-auto w-full max-w-content px-4 sm:px-6 lg:px-8;
   }
 
-  /* Legacy card — keep for admin pages */
+  /* Dark navy card — matches Flux Academy */
   .card-brand {
-    @apply rounded-xl border border-stone-200 bg-white shadow-card;
+    @apply rounded-2xl border border-[#252b37] bg-[#03133a] shadow-card;
   }
 
-  /* Primary button — used across admin pages */
+  /* Primary button — violet pill */
   .btn-primary {
-    @apply inline-flex items-center justify-center rounded-lg bg-stone-900 px-4 py-2
-           text-sm font-semibold text-white hover:bg-stone-700 transition-colors
+    @apply inline-flex items-center justify-center rounded-full bg-violet px-5 py-2.5
+           text-sm font-semibold text-white hover:bg-violet-dark transition-colors
            cursor-pointer disabled:opacity-50;
   }
 
-  /* Form input — used across all admin forms */
+  /* Form input — dark surface */
   .input-brand {
-    @apply rounded-lg border border-stone-300 bg-white px-3 py-2 text-sm text-stone-900
-           placeholder:text-stone-400 focus:border-stone-500 focus:outline-none
-           focus:ring-2 focus:ring-stone-200 transition-colors disabled:opacity-50;
+    @apply rounded-xl border border-[#252b37] bg-[#001c42] px-3 py-2 text-sm text-white
+           placeholder:text-[#717680] focus:border-[#7A5AF8] focus:outline-none
+           focus:ring-2 focus:ring-[#7A5AF8]/30 transition-colors disabled:opacity-50;
   }
 
-  /* Premium card with gold hover */
+  /* Premium card with violet hover */
   .card-premium {
-    @apply rounded-2xl border border-stone-200 bg-white shadow-card
-           hover:border-gold/40 hover:shadow-gold-sm transition-all duration-200;
+    @apply rounded-2xl border border-[#252b37] bg-[#03133a] shadow-card
+           hover:border-[#7A5AF8]/40 hover:shadow-violet transition-all duration-200;
   }
 
-  /* Glassmorphism */
+  /* Glassmorphism — dark */
   .glass {
-    background: rgba(255,255,255,0.75);
+    background: rgba(1, 15, 35, 0.75);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255,255,255,0.5);
+    border: 1px solid rgba(255, 255, 255, 0.08);
   }
 
   .glass-dark {
-    background: rgba(28,25,23,0.85);
+    background: rgba(3, 19, 58, 0.9);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255,255,255,0.08);
+    border: 1px solid rgba(122, 90, 248, 0.15);
   }
 
-  /* Hero gradient — very subtle warm-to-white */
+  /* Hero gradient — deep navy */
   .gradient-warm {
-    background: linear-gradient(135deg, #FAFAF9 0%, #FFFBEB 50%, #FAFAF9 100%);
+    background: linear-gradient(135deg, #010f23 0%, #03133a 50%, #010f23 100%);
   }
 
-  /* Premium hero with subtle gold tint */
+  /* Hero with violet glow */
   .gradient-hero-premium {
-    background: radial-gradient(ellipse 80% 60% at 50% -10%, #FEF9EC 0%, #FAFAF9 60%);
+    background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(122, 90, 248, 0.2) 0%, #010f23 60%);
   }
 
-  /* Dark section gradient */
+  /* Dark section */
   .gradient-dark-premium {
-    background: linear-gradient(135deg, #1C1917 0%, #292524 50%, #1C1917 100%);
+    background: linear-gradient(135deg, #010f23 0%, #001c42 50%, #010f23 100%);
   }
 
-  .text-brand-muted { color: var(--brand-muted); }
+  .text-brand-muted { color: #717680; }
+  .text-violet { color: var(--violet); }
   .text-gold { color: var(--gold); }
 
-  .badge-gold {
-    @apply inline-flex items-center rounded-full bg-amber-50 border border-amber-200
-           px-3 py-1 text-xs font-medium text-amber-700;
+  .badge-violet {
+    @apply inline-flex items-center rounded-full bg-[#7A5AF8]/10 border border-[#7A5AF8]/20
+           px-3 py-1 text-xs font-medium text-[#9B8AFB];
   }
 
-  .badge-terracotta {
-    @apply inline-flex items-center rounded-full bg-terracotta/10
-           px-2.5 py-0.5 text-xs font-medium text-terracotta;
+  .badge-gold {
+    @apply inline-flex items-center rounded-full bg-amber-500/10 border border-amber-500/20
+           px-3 py-1 text-xs font-medium text-amber-400;
   }
 
   .badge-sage {
-    @apply inline-flex items-center rounded-full bg-sage/10
-           px-2.5 py-0.5 text-xs font-medium text-sage;
+    @apply inline-flex items-center rounded-full bg-[#12b669]/10
+           px-2.5 py-0.5 text-xs font-medium text-[#12b669];
   }
 
-  /* Gold shimmer line */
-  .gold-line {
+  /* Violet shimmer line */
+  .violet-line {
     display: block;
     height: 3px;
-    background: linear-gradient(90deg, #CA8A04, #FCD34D, #CA8A04);
+    background: linear-gradient(90deg, #4932a1, #7A5AF8, #9B8AFB, #7A5AF8, #4932a1);
     border-radius: 999px;
   }
+
+  /* Legacy alias */
+  .gold-line { @apply violet-line; }
 }

@@ -24,17 +24,36 @@ const config: Config = {
         input:        'hsl(var(--input))',
         ring:         'hsl(var(--ring))',
 
-        /* Legacy brand tokens — keep for admin compatibility */
+        /* ── Flux Academy violet palette ── */
+        violet: {
+          DEFAULT: '#7A5AF8',
+          light:   '#9B8AFB',
+          dark:    '#4932a1',
+          glow:    'rgba(122,90,248,0.25)',
+        },
+
+        /* ── Deep navy palette ── */
+        navy: {
+          DEFAULT: '#010f23',
+          card:    '#03133a',
+          surface: '#252b37',
+          deep:    '#001c42',
+          muted:   '#181D27',
+        },
+
+        /* ── Legacy brand tokens — keep for admin compatibility ── */
         sand:            { DEFAULT: '#F5EFE0', light: '#FAF7F2', dark: '#E8DCC8' },
         terracotta:      { DEFAULT: '#C4622D', dark: '#A84F23', light: '#F0D4C4' },
         sage:            { DEFAULT: '#7A9E7E', light: '#C5D9C6' },
         'warm-brown':    '#3D2B1F',
         'warm-charcoal': '#5C4033',
-        'brand-muted':   '#9A8778',
-        'brand-border':  '#DDD4C5',
+        'brand-muted':   '#717680',
+        'brand-border':  '#252b37',
 
-        /* New premium tokens */
-        gold:   { DEFAULT: '#CA8A04', light: '#FEF9EC', dark: '#92400E', muted: '#D97706' },
+        /* Gold — kept for admin/pricing highlights */
+        gold: { DEFAULT: '#CA8A04', light: '#FEF9EC', dark: '#92400E', muted: '#D97706' },
+
+        /* Stone scale — kept for admin UI */
         'stone-950': '#0C0A09',
         'stone-900': '#1C1917',
         'stone-800': '#292524',
@@ -48,7 +67,7 @@ const config: Config = {
         'stone-50':  '#FAFAF9',
       },
       fontFamily: {
-        sans:   ['var(--font-dm-sans)', 'system-ui', 'sans-serif'],
+        sans:   ['var(--font-geist-sans)', 'system-ui', 'sans-serif'],
         arabic: ['var(--font-ibm-plex-arabic)', 'system-ui', 'sans-serif'],
       },
       fontSize: {
@@ -76,25 +95,31 @@ const config: Config = {
         pill:  '999px',
       },
       boxShadow: {
-        'brand-sm':  '0 1px 3px rgba(28,25,23,0.08)',
-        'brand-md':  '0 4px 16px rgba(28,25,23,0.06)',
-        'brand-lg':  '0 8px 32px rgba(28,25,23,0.08)',
-        card:        '0 1px 2px rgba(28,25,23,0.06), 0 4px 16px rgba(28,25,23,0.04)',
-        'gold-sm':   '0 4px 20px rgba(202,138,4,0.15)',
-        'gold-md':   '0 8px 32px rgba(202,138,4,0.20)',
-        float:       '0 2px 8px rgba(28,25,23,0.06), 0 16px 48px rgba(28,25,23,0.08)',
+        /* Flux Academy dark shadows */
+        'brand-sm':  '0 1px 3px rgba(0,0,0,0.4)',
+        'brand-md':  '0 4px 16px rgba(0,0,0,0.3)',
+        'brand-lg':  '0 8px 32px rgba(0,0,0,0.4)',
+        card:        '0 1px 2px rgba(0,0,0,0.3), 0 4px 16px rgba(0,0,0,0.2)',
+        violet:      '0 4px 20px rgba(122,90,248,0.25)',
+        'violet-lg': '0 8px 40px rgba(122,90,248,0.35)',
+        float:       '0 2px 8px rgba(0,0,0,0.3), 0 16px 48px rgba(0,0,0,0.4)',
+        /* Legacy aliases */
+        'gold-sm':   '0 4px 20px rgba(122,90,248,0.15)',
+        'gold-md':   '0 8px 32px rgba(122,90,248,0.25)',
       },
       keyframes: {
         'accordion-down': { from: { height: '0' }, to: { height: 'var(--radix-accordion-content-height)' } },
         'accordion-up':   { from: { height: 'var(--radix-accordion-content-height)' }, to: { height: '0' } },
         'fade-in':        { from: { opacity: '0', transform: 'translateY(8px)' }, to: { opacity: '1', transform: 'translateY(0)' } },
         'fade-in-scale':  { from: { opacity: '0', transform: 'scale(0.97)' }, to: { opacity: '1', transform: 'scale(1)' } },
+        'glow-pulse':     { '0%, 100%': { boxShadow: '0 0 20px rgba(122,90,248,0.3)' }, '50%': { boxShadow: '0 0 40px rgba(122,90,248,0.6)' } },
       },
       animation: {
-        'accordion-down':  'accordion-down 0.2s ease-out',
-        'accordion-up':    'accordion-up 0.2s ease-out',
-        'fade-in':         'fade-in 0.35s ease-out',
-        'fade-in-scale':   'fade-in-scale 0.3s ease-out',
+        'accordion-down': 'accordion-down 0.2s ease-out',
+        'accordion-up':   'accordion-up 0.2s ease-out',
+        'fade-in':        'fade-in 0.35s ease-out',
+        'fade-in-scale':  'fade-in-scale 0.3s ease-out',
+        'glow-pulse':     'glow-pulse 2s ease-in-out infinite',
       },
     },
   },

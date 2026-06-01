@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next'
-import { DM_Sans, IBM_Plex_Sans_Arabic } from 'next/font/google'
+import { IBM_Plex_Sans_Arabic } from 'next/font/google'
+import { GeistSans } from 'geist/font/sans'
 import { notFound } from 'next/navigation'
 import { getMessages, getTranslations } from 'next-intl/server'
 
@@ -11,15 +12,9 @@ import '@/app/globals.css'
 // ─── Fonts ────────────────────────────────────────────────────────────────────
 
 /**
- * DM Sans — primary English typeface
- * Humanist sans-serif: warm, modern, highly legible
+ * Geist — primary English typeface (matches Flux Academy style)
+ * Clean, modern geometric sans-serif by Vercel
  */
-const dmSans = DM_Sans({
-  subsets:  ['latin', 'latin-ext'],
-  variable: '--font-dm-sans',
-  weight:   ['300', '400', '500', '600', '700'],
-  display:  'swap',
-})
 
 /**
  * IBM Plex Sans Arabic — primary Arabic typeface
@@ -38,7 +33,7 @@ const ibmPlexArabic = IBM_Plex_Sans_Arabic({
 export const viewport: Viewport = {
   width:      'device-width',
   initialScale: 1,
-  themeColor: '#C4622D', // terracotta
+  themeColor: '#010f23', // deep navy
 }
 
 export async function generateMetadata({
@@ -104,7 +99,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
        * reference either --font-dm-sans or --font-ibm-plex-arabic.
        * Active font switched via [lang="ar"] body rule in globals.css.
        */
-      className={`${dmSans.variable} ${ibmPlexArabic.variable}`}
+      className={`${GeistSans.variable} ${ibmPlexArabic.variable}`}
       suppressHydrationWarning
     >
       <head />
